@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?><driver-configuration dn="JDBC.DriverSet.IDM.ADMIN" driver-set-dn="DriverSet.IDM.ADMIN" name="JDBC">
+	<attributes>
+		<configuration-manifest>
+			<manifest>
+				<capability name="password-subscribe"/>
+			</manifest>
+		</configuration-manifest>
+		<driver-filter-xml>
+			<filter>
+				<filter-class class-name="[Nothing]" publisher="ignore" publisher-create-homedir="true" publisher-track-template-member="true" subscriber="ignore"/>
+			</filter>
+		</driver-filter-xml>
+		<driver-image>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</driver-image>
+		<log-events inherit="true"/>
+		<trace-file inherit="true"/>
+		<trace-size-limit inherit="true"/>
+		<trace-level inherit="true"/>
+		<driver-trace-level inherit="true"/>
+		<log-limit inherit="true"/>
+		<java-module value="com.novell.nds.dirxml.driver.jdbc.JDBCDriverShim"/>
+		<policy-linkage/>
+		<driver-cache-limit value="0"/>
+		<shim-auth-id value="idm"/>
+		<shim-auth-password-query/>
+		<shim-auth-server value="jdbc:postgresql://1.2.3.4:5432/idm"/>
+		<driver-password-query/>
+		<driver-start-option no-resync="" value="1"/>
+		<shim-config-info-xml>
+			<driver-config name="JDBC IDM Driver">
+				<driver-options>
+					<configuration-values>
+						<definitions>
+							<definition display-name="Third-party JDBC driver class name:" name="jdbc-class" type="string">
+								<description>Enter the class name of your third-party JDBC driver.  Verify that the jar/zip file containing this class is version compatible with the target database.</description>
+								<value>org.postgresql.Driver</value>
+							</definition>
+							<group>
+								<!-- NOTE:  you have to give all params a name, even if they're not relevant to actual driver configuration -->
+								<definition display-name="Show database scoping parameters?" name="ignore1" type="enum">
+									<description>Show parameters that control how much of the database is visible to this driver?</description>
+									<enum-choice display-name="show">show</enum-choice>
+									<enum-choice display-name="hide">hide</enum-choice>
+									<value>show</value>
+								</definition>
+								<subordinates active-value="show">
+									<group>
+										<definition display-name="Synchronization filter:" name="sync-filter" type="enum">
+											<description>On start-up, the driver caches database metadata on a limited number of tables/views to facilitate data synchronization.  You can cache no table/view metadata (exclude all tables/views), cache metadata on all tables/views owned by a single database user (include by schema membership) or cache metadata on an explicit list of table/view names (include by table/view name).  If no table/view metadata is cached, the driver acts as a pass-through agent for embedded SQL.  In this state, standard XDS events (e.g., add, modify, delete) are ignored.</description>
+											<enum-choice display-name="exclude all tables/views">empty</enum-choice>
+											<enum-choice display-name="include by schema membership">schema</enum-choice>
+											<enum-choice display-name="include by table/view name">list</enum-choice>
+											<value>list</value>
+										</definition>
+										<subordinates active-value="schema">
+											<definition display-name="Schema name:" name="sync-schema" type="string">
+												<description>Enter the name of the database schema that contains the tables/views to synchronize.  Schema is usually synonymous with ownership.  For example, if database user 'idm' owns table 'table1', 'table1' is said to be part of the 'idm' schema. </description>
+												<value/>
+											</definition>
+											<group>
+												<definition display-name="Use custom regular expression filters?" name="ignore2" type="enum">
+													<description>Do you want to use regular expressions to include or exclude tables/views?  These parameters are useful when synchronizing with a large schema and you need to reduce the number of tables/view definitions cached by this driver.  Schema filtering can reduce start-up time as well as reduce runtime memory utilization.</description>
+													<enum-choice display-name="yes">1</enum-choice>
+													<enum-choice display-name="no">0</enum-choice>
+													<value>0</value>
+												</definition>
+												<subordinates active-value="1">
+													<definition display-name="Include filter expression:" name="include-table-filter" type="string">
+														<description>Specify a Java regular expression filter for including tables/views.</description>
+														<value/>
+													</definition>
+													<definition display-name="Exclude filter expression:" name="exclude-table-filter" type="string">
+														<description>Specify a Java regular expression filter for excluding tables/views.</description>
+														<value/>
+													</definition>
+												</subordinates>
+											</group>
+										</subordinates>
+										<subordinates active-value="list">
+											<definition display-name="Table/view names:" name="sync-tables" type="string">
+												<description>Enter the names of the tables/views to synchronize.  You may need to schema-qualify these names (e.g., owner.table).  Multiple values should be semicolon, comma, or space-delimited.  This parameter is useful if you need to reduce the number of table/view definitions cached by this driver, which can shorten driver start-up time as well as reduce runtime memory utilization.  It is also useful when synchronizing tables/views that reside in different database schemas (that is, are owned by multiple database users).</description>
+												<value>direct.view_usr; direct.view_grp</value>
+											</definition>
+										</subordinates>
+									</group>
+								</subordinates>
+							</group>
+							<definition display-name="Time syntax:" name="time-syntax" type="enum">
+								<description>Return time-related data types as integers, canonical strings, or Java strings?  The advantage of returning time values as integers is that integer values easily map to eDirectory's native time data types.  The disadvantage is the limited range.  An integer value that represents the number of seconds since 1970 can cover a date range from about 1910 to 2030 if interpreted as a signed value.  By default, however, Identity Manager interprets time-related integer data types as unsigned values.  String timestamps, on the other hand, can cover a much broader range, like database timestamps, and are more precise, but must be mapped to string data types in Identity Manager.  Canonical string timestamps, dates, and times are published in the following formats:  CCYYMMDDHHMMSSNNNNNNNNN, CCYYMMDD and HHMMSS, respectively (where C = century, Y = year, M = month or minute, D = day, H = hour, S = second, N = nano).  These  fixed-length formats have the virtue of collating in chronological order on any platform in any locale.  Java string timestamps, dates, and times are published in the following formats:  yyyy-mm-dd hh:mm:ss.fffffffff, yyyy-mm-dd and hh:mm:ss, respectively (where y = year, m = month or minute, d = day, h = hour, s = second, f = nano).</description>
+								<enum-choice display-name="integer (default)">_</enum-choice>
+								<enum-choice display-name="canonical string">2</enum-choice>
+								<enum-choice display-name="java string">3</enum-choice>
+								<value>_</value>
+							</definition>
+							<definition display-name="State directory:" name="state-dir" type="string">
+								<description>What's the path of the folder where you want this driver to store state information?  Changing this value when using triggerless publication can force a resync of all objects.</description>
+								<value>.</value>
+							</definition>
+							<group>
+								<definition display-name="Show connectivity parameters?" name="ignore11" type="enum">
+									<description>Show connectivity-related parameters?</description>
+									<enum-choice display-name="show">show</enum-choice>
+									<enum-choice display-name="hide">hide</enum-choice>
+									<value>hide</value>
+								</definition>
+								<subordinates active-value="show">
+									<definition display-name="Use minimal number of connections?" name="use-single-connection" type="enum">
+										<description>Should the Subscriber and Publisher share a database connection?  Normally, this driver uses three database connections when both channels are enabled (one subscription connection and two publication connections).  This parameter reduces the number of required connections to two (one dedicated publication connection and one shared subscription/publication connection).</description>
+										<enum-choice display-name="dynamic default">_</enum-choice>
+										<enum-choice display-name="yes">1</enum-choice>
+										<enum-choice display-name="no">0</enum-choice>
+										<value>_</value>
+									</definition>
+									<definition display-name="Connection initialization statements:" name="connection-init" type="string">
+										<description>What SQL statements, if any, should be executed immediately after connecting to the database?  Multiple values should be semicolon-delimited.  This parameter is useful for changing database contexts or setting session properties.</description>
+										<value/>
+									</definition>
+									<definition display-name="Connection properties:" name="connection-properties" type="string">
+										<description>List connection properties as key value pairs.  For example:  key=value.  Multiple values should be delimited by a semi-colon.  For example:  key1=value1; key2=value2.</description>
+										<value/>
+									</definition>
+								</subordinates>
+							</group>
+							<group>
+								<definition display-name="Show compatibility parameters?" name="ignore3" type="enum">
+									<description>Show parameters that can adjust adjust driver behavior to enhance compatibility with various third-party JDBC implementations and databases?</description>
+									<enum-choice display-name="show">show</enum-choice>
+									<enum-choice display-name="hide">hide</enum-choice>
+									<value>hide</value>
+								</definition>
+								<subordinates active-value="show">
+									<group>
+										<definition display-name="Use custom descriptor files?" name="ignore4" type="enum">
+											<description>Do you want to use custom XML descriptor files that describe the unique properties of your third-party JDBC implementation or database to this driver?</description>
+											<enum-choice display-name="yes">1</enum-choice>
+											<enum-choice display-name="no">0</enum-choice>
+											<value>0</value>
+										</definition>
+										<subordinates active-value="1">
+											<definition display-name="JDBC driver descriptor filename:" name="jdbc-driver-descriptor" type="string">
+												<description>Specify the name of the descriptor file for your third-party JDBC driver.  The filename must have the extension .xml and be located in a jar file whose name begins with "jdbc" (case-insensitive) and in the runtime classpath.</description>
+												<value/>
+											</definition>
+											<definition display-name="Database descriptor filename:" name="database-descriptor" type="string">
+												<description>Specify the name of the descriptor file for the target database.  The filename must have the extension .xml and be located in a jar file whose name begins with "jdbc" (case-insensitive) and in the runtime classpath.</description>
+												<value/>
+											</definition>
+										</subordinates>
+									</group>
+									<group>
+										<definition display-name="Show backward compatibility parameters?" name="ignore12" type="enum">
+											<description>Show parameters that ensure backward compatibility?</description>
+											<enum-choice display-name="show">show</enum-choice>
+											<enum-choice display-name="hide">hide</enum-choice>
+											<value>hide</value>
+										</definition>
+										<subordinates active-value="show">
+											<definition display-name="Enable table referential attribute support?" name="enable-refs" type="enum">
+												<description>Should table columns constrained with foreign key constraints be interpreted as referential attributes?  Referrential attributes allow relationships, such as containment, to exist between tables.  For 1.0 backwards compatibility, referential attribute support should be disabled.</description>
+												<enum-choice display-name="yes (default)">_</enum-choice>
+												<enum-choice display-name="no">0</enum-choice>
+												<value>_</value>
+											</definition>
+											<definition display-name="Enable view meta-identifier support?" name="enable-meta-identifiers" type="enum">
+												<description>Should view column name prefixes (e.g., "pk_", "fk_", "sv_", "mv_") be interpreted as metadata?  When enabled, said prefixes are not considered part of view column names.  Meta-identifiers allow one to define referrential relationships between views and mark view columns as multi or single-valued.  For 1.5 backwards compatibility, meta-identifier support should be disabled.</description>
+												<enum-choice display-name="yes (default)">_</enum-choice>
+												<enum-choice display-name="no">0</enum-choice>
+												<value>_</value>
+											</definition>
+										</subordinates>
+									</group>
+									<group>
+										<definition display-name="Show transaction-related parameters?" name="ignore5" type="enum">
+											<description>Show transaction-related parameters?</description>
+											<enum-choice display-name="show">show</enum-choice>
+											<enum-choice display-name="hide">hide</enum-choice>
+											<value>hide</value>
+										</definition>
+										<subordinates active-value="show">
+											<definition display-name="Use manual transactions?" name="use-manual-transactions" type="enum">
+												<description>Should this driver use transactions?  Are transactions supported by the target database or table implementation you are using?</description>
+												<enum-choice display-name="dynamic default">_</enum-choice>
+												<enum-choice display-name="yes">1</enum-choice>
+												<enum-choice display-name="no">0</enum-choice>
+												<value>_</value>
+											</definition>
+											<definition display-name="Transaction isolation level:" name="transaction-isolation-level" type="enum">
+												<description>Use this parameter to set advanced transaction properties.  For additional information on what these values mean, please refer to the JDBC tutorial at  http://java.sun.com/docs/books/tutorial/jdbc/basics/transactions.html and the documentation of your third-party JDBC driver or database.</description>
+												<enum-choice display-name="dynamic default">_</enum-choice>
+												<enum-choice display-name="unsupported">unsupported</enum-choice>
+												<enum-choice display-name="none">none</enum-choice>
+												<enum-choice display-name="read uncomitted">read uncommitted</enum-choice>
+												<enum-choice display-name="read comitted">read committed</enum-choice>
+												<enum-choice display-name="repeatable read">repeatable read</enum-choice>
+												<enum-choice display-name="serializable">serializable</enum-choice>
+												<value>read committed</value>
+											</definition>
+										</subordinates>
+									</group>
+									<group>
+										<definition display-name="Show statement-related parameters?" name="ignore6" type="enum">
+											<description>Show statement-related parameters?</description>
+											<enum-choice display-name="show">show</enum-choice>
+											<enum-choice display-name="hide">hide</enum-choice>
+											<value>hide</value>
+										</definition>
+										<subordinates active-value="show">
+											<definition display-name="Reuse statements?" name="reuse-statements" type="enum">
+												<description>Should this driver reuse java.sql.Statement objects or close and reallocate them with each use?</description>
+												<enum-choice display-name="dynamic default">_</enum-choice>
+												<enum-choice display-name="reuse">1</enum-choice>
+												<enum-choice display-name="close and reallocate">0</enum-choice>
+												<value>_</value>
+											</definition>
+											<definition display-name="Number of returned result sets:" name="handle-stmt-results" type="enum">
+												<description>How many result sets can be returned from an SQL statement?</description>
+												<enum-choice display-name="dynamic default">_</enum-choice>
+												<enum-choice display-name="none">none</enum-choice>
+												<enum-choice display-name="one">single</enum-choice>
+												<enum-choice display-name="multiple">multiple</enum-choice>
+												<value>_</value>
+											</definition>
+											<group>
+												<definition display-name="Enable statement-level locking?" name="enable-locking" type="enum">
+													<description>Should this driver explicitly lock database resources before executing each statement?</description>
+													<enum-choice display-name="no (default)">0</enum-choice>
+													<enum-choice display-name="yes">1</enum-choice>
+													<value>0</value>
+												</definition>
+												<subordinates active-value="1">
+													<group>
+														<definition display-name="Use custom lock statement generator class?" name="ignore13" type="enum">
+															<description>Do you want to use a custom class to generate locking statements?</description>
+															<enum-choice display-name="yes">1</enum-choice>
+															<enum-choice display-name="no">0</enum-choice>
+															<value>0</value>
+														</definition>
+														<subordinates active-value="1">
+															<definition display-name="Lock statement generator class:" name="lock-generator-class" type="string">
+																<description>Specify the name of the class used to generate locking statements.</description>
+																<value/>
+															</definition>
+														</subordinates>
+													</group>
+												</subordinates>
+											</group>
+										</subordinates>
+									</group>
+									<definition display-name="Force username case:" name="force-username-case" type="enum">
+										<description>What case should the authentication username be in?</description>
+										<enum-choice display-name="don't force (default)">_</enum-choice>
+										<enum-choice display-name="to upper case">upper</enum-choice>
+										<enum-choice display-name="to mixed case">mixed</enum-choice>
+										<enum-choice display-name="to lower case">lower</enum-choice>
+										<value>_</value>
+									</definition>
+									<definition display-name="Left outer-join operator:" name="left-outer-join-operator" type="enum">
+										<description>Choose a left outer-join operator.</description>
+										<enum-choice display-name="dynamic default">_</enum-choice>
+										<enum-choice display-name="*=">*=</enum-choice>
+										<enum-choice display-name="(+)">(+)</enum-choice>
+										<enum-choice display-name="LEFT OUTER JOIN">LEFT OUTER JOIN</enum-choice>
+										<value>_</value>
+									</definition>
+									<definition display-name="Retrieve minimal metadata?" id="105" name="minimal-metadata" type="enum">
+										<description>Should this driver run using the least amount of database metadata possible?  This parameter is useful when a given third-party JDBC driver does not implement one of the optional metadata method normally utilized by this driver.  When set to no, referential data and child parent relationships are no longer available to this driver.</description>
+										<enum-choice display-name="dynamic default">_</enum-choice>
+										<enum-choice display-name="yes">1</enum-choice>
+										<enum-choice display-name="no">0</enum-choice>
+										<value>_</value>
+									</definition>
+									<definition display-name="Function return method:" name="function-return-method" type="enum">
+										<description>How are results returned from database functions?</description>
+										<enum-choice display-name="dynamic default">_</enum-choice>
+										<enum-choice display-name="result set">result set</enum-choice>
+										<enum-choice display-name="scalar return value">return value</enum-choice>
+										<value>_</value>
+									</definition>
+									<definition display-name="Supports schemas in metadata retrieval?" name="supports-schemas-in-metadata-retrieval" type="enum">
+										<description>Can schema names be used to retrieve database metadata?</description>
+										<enum-choice display-name="dynamic default">_</enum-choice>
+										<enum-choice display-name="yes">1</enum-choice>
+										<enum-choice display-name="no">0</enum-choice>
+										<value>_</value>
+									</definition>
+									<definition display-name="Sort column names by:" name="column-position-comparator" type="enum">
+										<description>For legacy databases that don't support the notion of column position (DB2/AS400, for instance), a backup ordering algorithm must be employed.  Sorting columns names by hexadecimal value ensures that if the this driver is relocated to a different server, it will continue to function without modification.  Sorting column names by platform or locale string collation order is more intuitive, but may require configuration changes if a driver instance is relocated to a different server.  In particular, event log table column order and compound column name order may change.  In the case of the latter, the schema-mapping rule and object association values may need to be updated.  In the case of the former, event log table columns may have to be renamed.</description>
+										<enum-choice display-name="dynamic default">_</enum-choice>
+										<enum-choice display-name="hexadecimal value">com.novell.nds.dirxml.driver.jdbc.util.config.comp.StringByteComparator</enum-choice>
+										<enum-choice display-name="string collation order">com.novell.nds.dirxml.driver.jdbc.util.config.comp.StringComparator</enum-choice>
+										<value>_</value>
+									</definition>
+								</subordinates>
+							</group>
+						</definitions>
+					</configuration-values>
+				</driver-options>
+				<subscriber-options>
+					<configuration-values>
+						<definitions>
+							<group>
+								<definition display-name="Disable subscriber?" id="213" name="disable" type="enum">
+									<description>Do you want to ignore events flowing from Identity Manager to the database?</description>
+									<enum-choice display-name="no (default)">_</enum-choice>
+									<enum-choice display-name="yes">1</enum-choice>
+									<value>_</value>
+								</definition>
+								<subordinates active-value="_">
+									<group>
+										<definition display-name="Show primary key parameters?" id="214" name="ignore10" type="enum">
+											<description>Show parameters that control how and when primary key values are generated?</description>
+											<enum-choice display-name="show">show</enum-choice>
+											<enum-choice display-name="hide">hide</enum-choice>
+											<value>hide</value>
+										</definition>
+										<subordinates active-value="show">
+											<definition display-name="Generation/retrieval method (table-global):" id="216" name="key-gen-method" type="enum">
+												<description>How are primary key values being generated or retrieved?  This setting is global for all tables/views.</description>
+												<enum-choice display-name="subscription event (default)">_</enum-choice>
+												<enum-choice display-name="subscriber-generated">driver</enum-choice>
+												<enum-choice display-name="auto-generated/identity column">auto</enum-choice>
+												<value>_</value>
+											</definition>
+											<definition display-name="Retrieval timing (table-global):" id="215" name="key-gen-timing" type="enum">
+												<description>When should primary key values be retrieved?  Before or after row insertion?  This setting is global for all tables/views.</description>
+												<enum-choice display-name="before row insertion (default)">_</enum-choice>
+												<enum-choice display-name="after row insertion">after</enum-choice>
+												<value>after</value>
+											</definition>
+											<definition display-name="Method and timing (table-local):" name="key-gen" type="string">
+												<description>Specify how and when primary key values are generated/retrieved on a per table/view basis.  This parameter overrides global method and timing settings.  Multiple values should be semicolon, comma, or space-delimited.</description>
+												<!-- split MS by database; rope-in value for MS versions < 2005 -->
+												<value>view_usr("?=indirect.proc_idu()", before); view_grp("?=indirect.proc_idg()")</value>
+											</definition>
+										</subordinates>
+									</group>
+									<definition display-name="Disable statement-level locking?" name="disable-locking" type="enum">
+										<description>Disable statement locking?  Should explicit locking or database resources be disabled on this channel?</description>
+										<enum-choice display-name="yes">1</enum-choice>
+										<enum-choice display-name="no (default)">0</enum-choice>
+										<value>0</value>
+									</definition>
+									<definition display-name="Add default values on view insert?" id="213" name="add-default-values-on-view-insert" type="enum">
+										<description>Should the Subscriber add default values to insert operations on views?  This parameter is desirable for satisfying instead-of-trigger constraints that require non-null values be provided for non-nullable columns before instead-of-triggers fire.  This parameter has no effect on tables.</description>
+										<enum-choice display-name="dynamic default">_</enum-choice>
+										<enum-choice display-name="yes">1</enum-choice>
+										<enum-choice display-name="no">0</enum-choice>
+										<value>_</value>
+										<!-- base on direct or indirect synchronization model -->
+									</definition>
+								</subordinates>
+							</group>
+						</definitions>
+					</configuration-values>
+				</subscriber-options>
+				<publisher-options>
+					<configuration-values>
+						<definitions>
+							<group>
+								<definition display-name="Disable publisher?" id="213" name="disable" type="enum">
+									<description>Do you want to ignore events flowing from the database to Identity Manager?</description>
+									<enum-choice display-name="no (default)">_</enum-choice>
+									<enum-choice display-name="yes">1</enum-choice>
+									<value>1</value>
+								</definition>
+								<subordinates active-value="_">
+									<group>
+										<definition display-name="Publication mode:" name="publication-mode" type="enum">
+											<description>Do you want to use triggered or triggerless publication?  Triggered publication uses database triggers to capture events and log them in a table.  Triggerless publication, in contrast, derives events by inspecting database tables/views.  Triggered publication is more efficient, but requires substantial database-side configuration.  Triggerless publication is less efficient, but requires minimal database-side configuration.</description>
+											<enum-choice display-name="triggered">_</enum-choice>
+											<enum-choice display-name="triggerless">2</enum-choice>
+											<value>_</value>
+										</definition>
+										<subordinates active-value="_">
+											<definition display-name="Event log table name:" name="log-table" type="string">
+												<description>What's the name of the table where publication events are stored?</description>
+												<value>direct.direct_process</value>
+											</definition>
+											<definition display-name="Delete processed rows?" name="delete-from-log" type="enum">
+												<description>Should processed rows be deleted from the event log table?  There is a significant performance hit when processed rows are left in the event log table.  The performance cost can be mitigated by moving processed rows from the event log table into an event history table using the "Post polling statements:" parameter.</description>
+												<enum-choice display-name="yes (default)">_</enum-choice>
+												<enum-choice display-name="no">0</enum-choice>
+												<value>_</value>
+											</definition>
+											<definition display-name="Optimize updates?" name="optimize-update" type="enum">
+												<description>Should the Publisher optimize update events before sending them to the engine?  When set to yes, all update events are optimized.  When set to no, select update events are not.  For a more complete explanation of this parameter, please consult the driver implementation guide.</description>
+												<enum-choice display-name="no (default)">_</enum-choice>
+												<enum-choice display-name="yes">1</enum-choice>
+												<value>_</value>
+											</definition>
+											<definition display-name="Allow loopback?" name="allow-loopback" type="enum">
+												<description>Allow events initiated by the Subscriber channel to loopback on the Publisher channel?</description>
+												<enum-choice display-name="no (default)">_</enum-choice>
+												<enum-choice display-name="yes">1</enum-choice>
+												<value>_</value>
+											</definition>
+											<definition display-name="Disable statement-level locking?" name="disable-locking" type="enum">
+												<description>Disable statement locking?  Should explicit locking or database resources be disabled on this channel?</description>
+												<enum-choice display-name="yes">1</enum-choice>
+												<enum-choice display-name="no (default)">0</enum-choice>
+												<value>0</value>
+											</definition>
+										</subordinates>
+										<subordinates active-value="2">
+											<definition display-name="Startup option:" name="startup-option" type="enum">
+												<description>Determine the Publisher's behavior on start-up.</description>
+												<enum-choice display-name="process all changes (default)">_</enum-choice>
+												<enum-choice display-name="process future changes only">2</enum-choice>
+												<enum-choice display-name="resync all objects">1</enum-choice>
+												<value>_</value>
+											</definition>
+										</subordinates>
+									</group>
+									<group>
+										<definition display-name="Enable future event processing?" name="handle-future-events" type="enum">
+											<description>Process events in the event log table based upon their effective date as opposed to order of insertion (triggered publication) or publish database local time with each event (triggerless publication)?</description>
+											<enum-choice display-name="no (default)">_</enum-choice>
+											<enum-choice display-name="yes">1</enum-choice>
+											<value>_</value>
+										</definition>
+										<subordinates active-value="1">
+											<group>
+												<definition display-name="Use custom timestamp statement?" name="ignore8" type="enum">
+													<description>Do you want to specify a custom SQL statement that supplies the current time/date on the database server?  By default, a statement is dynamically derived.</description>
+													<enum-choice display-name="yes">1</enum-choice>
+													<enum-choice display-name="no">0</enum-choice>
+													<value>0</value>
+												</definition>
+												<subordinates active-value="1">
+													<definition display-name="Current timestamp statement:" name="current-timestamp-stmt" type="string">
+														<description>What SQL statement should be used to determine the current time and date on the database server?"</description>
+														<value/>
+													</definition>
+												</subordinates>
+											</group>
+										</subordinates>
+									</group>
+									<group>
+										<definition display-name="Show polling-related parameters?" name="ignore9" type="enum">
+											<description>Show parameters that control polling behavior?</description>
+											<enum-choice display-name="show">show</enum-choice>
+											<enum-choice display-name="hide">hide</enum-choice>
+											<value>hide</value>
+										</definition>
+										<subordinates active-value="show">
+											<definition display-name="Polling interval (in seconds):" name="polling-interval" type="string">
+												<!--
+                            NOTE: can't be type="int"; this type doesn't permit no value which is permissible
+                            when time-of-day is used.
+                        -->
+												<description>What's the minimum number of seconds of inactivity that should elapse between polling cycles?  In practice, more than the number of specified seconds may elapse (i.e., this is a  lower bound only).  The default is 10 seconds.</description>
+												<value>10</value>
+											</definition>
+											<definition display-name="Polling time of day:" name="time-of-day" type="string">
+												<description>When should the Publisher check for new database events each day?  Time values may be entered in multiple formats.  The preferred format is hh:mm:ss, where h = hour, m = minute, s = second.</description>
+												<value/>
+											</definition>
+											<definition display-name="Post polling statements:" name="post-poll-stmt" type="string">
+												<description>What statements, if any, should be executed after an active polling cycle?  This parameter is useful, for instance, for calling a stored procedure/function that moves processed rows from the event log table into a history table and rebuilds indexes on the event log table.  Multiple values should be semicolon-delimited.</description>
+												<value>SELECT direct.proc_directlog(); DELETE FROM indirect.indirect_process</value>
+											</definition>
+											<definition display-name="Batch size:" name="batch-size" type="enum">
+												<description>What is the desired number of database events that the Publisher group together in a single publication document?  The number of events per document may be less but will not be greater.  The upper bound of 128 was chosen to minimize the likelihood of overflowing the Java heap and to mitigate delaying termination of the Publisher thread on driver shutdown.</description>
+												<enum-choice display-name="1 (default)">_</enum-choice>
+												<enum-choice display-name="2">2</enum-choice>
+												<enum-choice display-name="4">4</enum-choice>
+												<enum-choice display-name="8">8</enum-choice>
+												<enum-choice display-name="16">16</enum-choice>
+												<enum-choice display-name="32">32</enum-choice>
+												<enum-choice display-name="64">64</enum-choice>
+												<enum-choice display-name="128">128</enum-choice>
+												<value>_</value>
+											</definition>
+										</subordinates>
+									</group>
+								</subordinates>
+							</group>
+							<definition display-name="Heartbeat interval (in minutes):" name="pub-heartbeat-interval" type="integer">
+								<description>How many minutes of Publisher inactivity should elapse before the Publisher sends a heartbeat document?  In practice, more than the number of minutes specified may elapse.  That is, this parameter defines a lower bound.</description>
+								<value>0</value>
+							</definition>
+						</definitions>
+					</configuration-values>
+				</publisher-options>
+			</driver-config>
+		</shim-config-info-xml>
+		<global-config-values>
+			<configuration-values>
+				<definitions/>
+			</configuration-values>
+		</global-config-values>
+		<application-schema/>
+	</attributes>
+	<children>
+		<publisher name="Publisher">
+			<attributes/>
+			<children/>
+		</publisher>
+		<subscriber name="Subscriber">
+			<attributes/>
+			<children/>
+		</subscriber>
+	</children>
+</driver-configuration>

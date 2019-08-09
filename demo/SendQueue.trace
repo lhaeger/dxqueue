@@ -1,0 +1,227 @@
+[06/17/10 19:14:24.881]:SendQueueEvent ST:Start transaction.
+[06/17/10 19:14:24.889]:SendQueueEvent ST:Processing events for transaction.
+[06/17/10 19:14:24.893]:SendQueueEvent ST:
+<nds dtdversion="3.5" ndsversion="8.x">
+  <source>
+    <product version="3.5.10.20070918 ">DirXML</product>
+    <contact>Novell, Inc.</contact>
+  </source>
+  <input>
+    <add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23">
+      <add-attr attr-name="CN">
+        <value timestamp="1276758864#23" type="string">USER</value>
+      </add-attr>
+      <add-attr attr-name="Surname">
+        <value timestamp="1276758864#3" type="string">Last</value>
+      </add-attr>
+      <add-attr attr-name="Given Name">
+        <value timestamp="1276758864#4" type="string">First</value>
+      </add-attr>
+    </add>
+  </input>
+</nds>
+[06/17/10 19:14:24.903]:SendQueueEvent ST:Applying event transformation policies.
+[06/17/10 19:14:24.904]:SendQueueEvent ST:Applying policy: %+C%14CSend Queue Event%-C.
+[06/17/10 19:14:24.907]:SendQueueEvent ST:  Applying to add #1.
+[06/17/10 19:14:24.909]:SendQueueEvent ST:    Evaluating selection criteria for rule 'Capture Event'.
+[06/17/10 19:14:24.910]:SendQueueEvent ST:    Rule selected.
+[06/17/10 19:14:24.912]:SendQueueEvent ST:    Applying rule 'Capture Event'.
+[06/17/10 19:14:24.913]:SendQueueEvent ST:      Action: do-set-local-variable("OPERATION",scope="policy",token-replace-all(">","&gt;",token-replace-all("<","&lt;",token-xml-serialize(token-xpath("."))))).
+[06/17/10 19:14:24.916]:SendQueueEvent ST:        arg-string(token-replace-all(">","&gt;",token-replace-all("<","&lt;",token-xml-serialize(token-xpath(".")))))
+[06/17/10 19:14:24.918]:SendQueueEvent ST:          token-replace-all(">","&gt;",token-replace-all("<","&lt;",token-xml-serialize(token-xpath("."))))
+[06/17/10 19:14:24.920]:SendQueueEvent ST:            token-replace-all(">","&gt;",token-replace-all("<","&lt;",token-xml-serialize(token-xpath("."))))
+[06/17/10 19:14:24.922]:SendQueueEvent ST:              token-replace-all("<","&lt;",token-xml-serialize(token-xpath(".")))
+[06/17/10 19:14:24.924]:SendQueueEvent ST:                token-replace-all("<","&lt;",token-xml-serialize(token-xpath(".")))
+[06/17/10 19:14:24.926]:SendQueueEvent ST:                  token-xml-serialize(token-xpath("."))
+[06/17/10 19:14:24.927]:SendQueueEvent ST:                    token-xml-serialize(token-xpath("."))
+[06/17/10 19:14:24.928]:SendQueueEvent ST:                      token-xpath(".")
+[06/17/10 19:14:24.930]:SendQueueEvent ST:                      Token Value: {<add> @cached-time = "20100617071424.789Z" @class-name = "User" @event-id = "linux#20100617071424#1#1" @qualified-src-dn = "O=Identities\CN=USER" @src-dn = "\EDIR\Identities\USER" @src-entry-id = "34904" @timestamp = "1276758864#23"}.
+[06/17/10 19:14:24.936]:SendQueueEvent ST:                      Arg Value: {<add> @cached-time = "20100617071424.789Z" @class-name = "User" @event-id = "linux#20100617071424#1#1" @qualified-src-dn = "O=Identities\CN=USER" @src-dn = "\EDIR\Identities\USER" @src-entry-id = "34904" @timestamp = "1276758864#23"}.
+[06/17/10 19:14:24.941]:SendQueueEvent ST:                    Token Value: "<add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23">
+	<add-attr attr-name="CN">
+		<value timestamp="1276758864#23" type="string">USER</value>
+	</add-attr>
+	<add-attr attr-name="Surname">
+		<value timestamp="1276758864#3" type="string">Last</value>
+	</add-attr>
+	<add-attr attr-name="Given Name">
+		<value timestamp="1276758864#4" type="string">First</value>
+	</add-attr>
+</add>".
+[06/17/10 19:14:24.951]:SendQueueEvent ST:                  Arg Value: "<add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23">
+	<add-attr attr-name="CN">
+		<value timestamp="1276758864#23" type="string">USER</value>
+	</add-attr>
+	<add-attr attr-name="Surname">
+		<value timestamp="1276758864#3" type="string">Last</value>
+	</add-attr>
+	<add-attr attr-name="Given Name">
+		<value timestamp="1276758864#4" type="string">First</value>
+	</add-attr>
+</add>".
+[06/17/10 19:14:24.960]:SendQueueEvent ST:                Token Value: "&lt;add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23">
+	&lt;add-attr attr-name="CN">
+		&lt;value timestamp="1276758864#23" type="string">USER&lt;/value>
+	&lt;/add-attr>
+	&lt;add-attr attr-name="Surname">
+		&lt;value timestamp="1276758864#3" type="string">Last&lt;/value>
+	&lt;/add-attr>
+	&lt;add-attr attr-name="Given Name">
+		&lt;value timestamp="1276758864#4" type="string">First&lt;/value>
+	&lt;/add-attr>
+&lt;/add>".
+[06/17/10 19:14:24.968]:SendQueueEvent ST:              Arg Value: "&lt;add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23">
+	&lt;add-attr attr-name="CN">
+		&lt;value timestamp="1276758864#23" type="string">USER&lt;/value>
+	&lt;/add-attr>
+	&lt;add-attr attr-name="Surname">
+		&lt;value timestamp="1276758864#3" type="string">Last&lt;/value>
+	&lt;/add-attr>
+	&lt;add-attr attr-name="Given Name">
+		&lt;value timestamp="1276758864#4" type="string">First&lt;/value>
+	&lt;/add-attr>
+&lt;/add>".
+[06/17/10 19:14:24.976]:SendQueueEvent ST:            Token Value: "&lt;add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23"&gt;
+	&lt;add-attr attr-name="CN"&gt;
+		&lt;value timestamp="1276758864#23" type="string"&gt;USER&lt;/value&gt;
+	&lt;/add-attr&gt;
+	&lt;add-attr attr-name="Surname"&gt;
+		&lt;value timestamp="1276758864#3" type="string"&gt;Last&lt;/value&gt;
+	&lt;/add-attr&gt;
+	&lt;add-attr attr-name="Given Name"&gt;
+		&lt;value timestamp="1276758864#4" type="string"&gt;First&lt;/value&gt;
+	&lt;/add-attr&gt;
+&lt;/add&gt;".
+[06/17/10 19:14:24.986]:SendQueueEvent ST:          Arg Value: "&lt;add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23"&gt;
+	&lt;add-attr attr-name="CN"&gt;
+		&lt;value timestamp="1276758864#23" type="string"&gt;USER&lt;/value&gt;
+	&lt;/add-attr&gt;
+	&lt;add-attr attr-name="Surname"&gt;
+		&lt;value timestamp="1276758864#3" type="string"&gt;Last&lt;/value&gt;
+	&lt;/add-attr&gt;
+	&lt;add-attr attr-name="Given Name"&gt;
+		&lt;value timestamp="1276758864#4" type="string"&gt;First&lt;/value&gt;
+	&lt;/add-attr&gt;
+&lt;/add&gt;".
+[06/17/10 19:14:25.012]:SendQueueEvent ST:      Action: do-set-local-variable("XDS",scope="policy",arg-node-set(token-xml-parse("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>"+"INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('"+token-attr("CN")+"','"+token-xpath("@event-id")+"','"+token-local-variable("OPERATION")+"')</jdbc:sql></jdbc:statement></input></nds>"))).
+[06/17/10 19:14:25.016]:SendQueueEvent ST:        arg-node-set(token-xml-parse("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>"+"INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('"+token-attr("CN")+"','"+token-xpath("@event-id")+"','"+token-local-variable("OPERATION")+"')</jdbc:sql></jdbc:statement></input></nds>"))
+[06/17/10 19:14:25.019]:SendQueueEvent ST:          token-xml-parse("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>"+"INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('"+token-attr("CN")+"','"+token-xpath("@event-id")+"','"+token-local-variable("OPERATION")+"')</jdbc:sql></jdbc:statement></input></nds>")
+[06/17/10 19:14:25.023]:SendQueueEvent ST:            token-xml-parse("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>"+"INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('"+token-attr("CN")+"','"+token-xpath("@event-id")+"','"+token-local-variable("OPERATION")+"')</jdbc:sql></jdbc:statement></input></nds>")
+[06/17/10 19:14:25.026]:SendQueueEvent ST:              token-text("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>")
+[06/17/10 19:14:25.028]:SendQueueEvent ST:              token-text("INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('")
+[06/17/10 19:14:25.029]:SendQueueEvent ST:              token-attr("CN")
+[06/17/10 19:14:25.030]:SendQueueEvent ST:                Token Value: "USER".
+[06/17/10 19:14:25.031]:SendQueueEvent ST:              token-text("','")
+[06/17/10 19:14:25.032]:SendQueueEvent ST:              token-xpath("@event-id")
+[06/17/10 19:14:25.033]:SendQueueEvent ST:                Token Value: "linux#20100617071424#1#1".
+[06/17/10 19:14:25.035]:SendQueueEvent ST:              token-text("','")
+[06/17/10 19:14:25.036]:SendQueueEvent ST:              token-local-variable("OPERATION")
+[06/17/10 19:14:25.037]:SendQueueEvent ST:                Token Value: "&lt;add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23"&gt;
+	&lt;add-attr attr-name="CN"&gt;
+		&lt;value timestamp="1276758864#23" type="string"&gt;USER&lt;/value&gt;
+	&lt;/add-attr&gt;
+	&lt;add-attr attr-name="Surname"&gt;
+		&lt;value timestamp="1276758864#3" type="string"&gt;Last&lt;/value&gt;
+	&lt;/add-attr&gt;
+	&lt;add-attr attr-name="Given Name"&gt;
+		&lt;value timestamp="1276758864#4" type="string"&gt;First&lt;/value&gt;
+	&lt;/add-attr&gt;
+&lt;/add&gt;".
+[06/17/10 19:14:25.044]:SendQueueEvent ST:              token-text("')</jdbc:sql></jdbc:statement></input></nds>")
+[06/17/10 19:14:25.045]:SendQueueEvent ST:              Arg Value: "<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('USER','linux#20100617071424#1#1','&lt;add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23"&gt;
+	&lt;add-attr attr-name="CN"&gt;
+		&lt;value timestamp="1276758864#23" type="string"&gt;USER&lt;/value&gt;
+	&lt;/add-attr&gt;
+	&lt;add-attr attr-name="Surname"&gt;
+		&lt;value timestamp="1276758864#3" type="string"&gt;Last&lt;/value&gt;
+	&lt;/add-attr&gt;
+	&lt;add-attr attr-name="Given Name"&gt;
+		&lt;value timestamp="1276758864#4" type="string"&gt;First&lt;/value&gt;
+	&lt;/add-attr&gt;
+&lt;/add&gt;')</jdbc:sql></jdbc:statement></input></nds>".
+[06/17/10 19:14:25.056]:SendQueueEvent ST:          Token Value: {/}.
+[06/17/10 19:14:25.057]:SendQueueEvent ST:          Arg Value: {/}.
+[06/17/10 19:14:25.058]:SendQueueEvent ST:      Action: do-set-local-variable("DriverDN",scope="policy","\EDIR\ADMIN\IDM\DriverSet\JDBC").
+[06/17/10 19:14:25.059]:SendQueueEvent ST:        arg-string("\EDIR\ADMIN\IDM\DriverSet\JDBC")
+[06/17/10 19:14:25.061]:SendQueueEvent ST:          token-text("\EDIR\ADMIN\IDM\DriverSet\JDBC")
+[06/17/10 19:14:25.062]:SendQueueEvent ST:          Arg Value: "\EDIR\ADMIN\IDM\DriverSet\JDBC".
+[06/17/10 19:14:25.063]:SendQueueEvent ST:      Action: do-set-local-variable("CmdResult",scope="policy",arg-node-set(token-xpath("dxqueue:sendQueueEvent($DriverDN, $XDS/nds)"))).
+[06/17/10 19:14:25.065]:SendQueueEvent ST:        arg-node-set(token-xpath("dxqueue:sendQueueEvent($DriverDN, $XDS/nds)"))
+[06/17/10 19:14:25.067]:SendQueueEvent ST:          token-xpath("dxqueue:sendQueueEvent($DriverDN, $XDS/nds)")
+[06/17/10 19:14:25.144]:SendQueueEvent ST:          Token Value: {<success>}.
+[06/17/10 19:14:25.145]:SendQueueEvent ST:          Arg Value: {<success>}.
+[06/17/10 19:14:25.147]:SendQueueEvent ST:Policy returned:
+[06/17/10 19:14:25.148]:SendQueueEvent ST:
+<nds dtdversion="3.5" ndsversion="8.x">
+  <source>
+    <product version="3.5.10.20070918 ">DirXML</product>
+    <contact>Novell, Inc.</contact>
+  </source>
+  <input>
+    <add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23">
+      <add-attr attr-name="CN">
+        <value timestamp="1276758864#23" type="string">USER</value>
+      </add-attr>
+      <add-attr attr-name="Surname">
+        <value timestamp="1276758864#3" type="string">Last</value>
+      </add-attr>
+      <add-attr attr-name="Given Name">
+        <value timestamp="1276758864#4" type="string">First</value>
+      </add-attr>
+    </add>
+  </input>
+</nds>
+[06/17/10 19:14:25.157]:SendQueueEvent ST:Subscriber processing add for \EDIR\Identities\USER.
+[06/17/10 19:14:25.158]:SendQueueEvent ST:No object matching policies.
+[06/17/10 19:14:25.160]:SendQueueEvent ST:No object creation policies.
+[06/17/10 19:14:25.161]:SendQueueEvent ST:No object placement policies.
+[06/17/10 19:14:25.162]:SendQueueEvent ST:Submitting add to subscriber shim.
+[06/17/10 19:14:25.163]:SendQueueEvent ST:No command transformation policies.
+[06/17/10 19:14:25.164]:SendQueueEvent ST:Filtering out notification-only attributes.
+[06/17/10 19:14:25.165]:SendQueueEvent ST:Fixing up association references.
+[06/17/10 19:14:25.166]:SendQueueEvent ST:No schema mapping policies.
+[06/17/10 19:14:25.167]:SendQueueEvent ST:No output transformation policies.
+[06/17/10 19:14:25.168]:SendQueueEvent ST:Submitting document to subscriber shim:
+[06/17/10 19:14:25.170]:SendQueueEvent ST:
+<nds dtdversion="3.5" ndsversion="8.x">
+  <source>
+    <product version="3.5.10.20070918 ">DirXML</product>
+    <contact>Novell, Inc.</contact>
+  </source>
+  <input>
+    <add cached-time="20100617071424.789Z" class-name="User" event-id="linux#20100617071424#1#1" qualified-src-dn="O=Identities\CN=USER" src-dn="\EDIR\Identities\USER" src-entry-id="34904" timestamp="1276758864#23">
+      <add-attr attr-name="CN">
+        <value timestamp="1276758864#23" type="string">USER</value>
+      </add-attr>
+      <add-attr attr-name="Surname">
+        <value timestamp="1276758864#3" type="string">Last</value>
+      </add-attr>
+      <add-attr attr-name="Given Name">
+        <value timestamp="1276758864#4" type="string">First</value>
+      </add-attr>
+    </add>
+  </input>
+</nds>
+[06/17/10 19:14:25.178]:SendQueueEvent ST:SubscriptionShim.execute() returned:
+[06/17/10 19:14:25.179]:SendQueueEvent ST:
+<nds dtdversion="3.5">
+  <source>
+    <product instance="SendQueueEvent" version="3.5.10.20070918 ">DirXML Null Driver</product>
+    <contact>Novell, Inc.</contact>
+  </source>
+  <output>
+    <status event-id="linux#20100617071424#1#1" level="success"/>
+  </output>
+</nds>
+[06/17/10 19:14:25.182]:SendQueueEvent ST:No input transformation policies.
+[06/17/10 19:14:25.183]:SendQueueEvent ST:No schema mapping policies.
+[06/17/10 19:14:25.184]:SendQueueEvent ST:Resolving association references.
+[06/17/10 19:14:25.186]:SendQueueEvent ST:Processing returned document.
+[06/17/10 19:14:25.187]:SendQueueEvent ST:Processing operation <status> for .
+[06/17/10 19:14:25.189]:SendQueueEvent ST:
+DirXML Log Event -------------------
+     Driver:   \EDIR\ADMIN\IDM\DriverSet\SendQueueEvent
+     Channel:  Subscriber
+     Object:   \EDIR\Identities\USER
+     Status:   Success
+[06/17/10 19:14:25.192]:SendQueueEvent ST:End transaction.
