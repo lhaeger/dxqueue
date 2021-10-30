@@ -170,8 +170,9 @@ function sendMigrateApp(driverDN, myElement) {
                 debugMessage('Detected known command: ' + myOps.first().getLocalName())
             }
             
-            else {
-                debugMessage('Detected unknown command: ' + myOps.first().getLocalName() + '. Submitting anyway, it may be ignored by the shim ')
+            else { 
+            return NdsDtd.createStatusDocument(NdsDtd.SL_ERROR, null, ('command:' + myOps.first().getLocalName() + 'Not valid for this function'))
+                .getDocumentElement()
             }
 
             debugMessage('Serializing document to ByteArray with encoding: ' + myEncoding)
