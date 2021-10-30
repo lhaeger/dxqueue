@@ -89,7 +89,8 @@ function properXDS(doc) {
             debugMessage('Returning supplied XDS unchanged, already proper XDS', debugDefault + 1)
             return doc;
         }
-        if (null != rootDocNode && rootNodeName.matches('add|modify|modify-password|query|query-ex|rename|move|delete|trigger|sync|statement')) {
+        // known valid commands from XDS DTD
+        if (null != rootDocNode && rootNodeName.matches('add|modify|modify-password|query|query-ex|rename|move|delete|trigger|sync')) {
             // Merging supplied XDS with wrapper
             debugMessage('Merging supplied XDS with wrapper: ' + rootNodeName, debugDefault + 1)
             Packages.com.novell.nds.dirxml.engine.XdsUtil.graftSubtree(docRet, rootDocNode);
@@ -166,12 +167,11 @@ function sendQueueEvent(driverDN, myElement) {
             }
 
             if (myOps.first().getLocalName().matches('add|modify|modify-password|rename|move|delete|trigger|sync|statement')) {
-                debugMessage('Detected command: ' + myOps.first().getLocalName())
+                debugMessage('Detected known command: ' + myOps.first().getLocalName())
             }
 
             else {
-                return NdsDtd.createStatusDocument(NdsDtd.SL_ERROR, null, 'command:' + myOps.first().getLocalName() + ' is not valid for this function')
-                    .getDocumentElement()
+                debugMessage('Detected unknown command: ' + myOps.first().getLocalName() + '. Submitting anyway, it may be ignored by the shim ')
             }
 
             debugMessage('Serializing document to ByteArray with encoding: ' + myEncoding)
