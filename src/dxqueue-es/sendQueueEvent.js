@@ -123,32 +123,38 @@ function sendQueueEvent(driverDN, myElement) {
     // function debugMessage
     // function properXDS
     // skeletonXDS
+
+    var supportedOps = 'add|modify|modify-password|rename|move|delete|trigger|sync|statement';
+    // relaxed processing: unsupported commands normally are ignored, but may mean something to specififc shims.
+    // as long as the doc is otherwise well formed, it should not crash the engine.
+    var processUnsupportedOps = true
+    var myEncoding = java.nio.charset.StandardCharsets.UTF_8;
+
     if (!(Packages.com.novell.nds.dirxml.engine.DirXML.isExternal())) {
-        try {
+        try {           
             debugMessage('Cleaning up supplied XDS');
             var theElement = properXDS(myElement);
             (theElement === myElement) ? debugMessage('Passthru XDS as-is') : debugMessage('Cleaned up XDS')
             //debugMessage('Detected theElement: ' + theElement, debugDefault + 1)
-            var myEncoding = java.nio.charset.StandardCharsets.UTF_8;
             debugMessage('Validating document')
 
             try {
                 if (null == rootDoc) {
                     var rootDoc = theElement.first().getFirstChild().getOwnerDocument()
                 }
-            } catch (e) { debugMessage('First node not found, falling back to first alternate mechanism') }
+            } catch (e) { debugMessage('First node not found, falling back to first alternate mechanism', debugDefault + 1) }
             try {
                 if (null == rootDoc) {
                     var rootDoc = theElement.getFirstChild().getOwnerDocument()
                 }
-            } catch (e) { debugMessage('First node not found, falling back to second alternate mechanism' + e) }
+            } catch (e) { debugMessage('First node not found, falling back to second alternate mechanism' + e, debugDefault + 1) }
             try {
                 if (null == rootDoc) {
                     var rootDoc = theElement.first().getOwnerDocument()
                 }
             } catch (e) { debugMessage('error' + e) }
             if (null == rootDoc) {
-                debugMessage('Trying built-in getOwnerDocument() method as last resort');
+                debugMessage('Trying built-in getOwnerDocument() method as last resort', debugDefault + 1);
                 var rootDoc = theElement.getOwnerDocument()
             }
 
@@ -166,12 +172,17 @@ function sendQueueEvent(driverDN, myElement) {
                     .getDocumentElement()
             }
 
-            if (myOps.first().getLocalName().matches('add|modify|modify-password|rename|move|delete|trigger|sync|statement')) {
+            if (myOps.first().getLocalName().matches(supportedOps)) {
                 debugMessage('Detected known command: ' + myOps.first().getLocalName())
             }
 
-            else {
+            else if (processUnsupportedOps) {
                 debugMessage('Detected unknown command: ' + myOps.first().getLocalName() + '. Submitting anyway, it may be ignored by the shim ')
+            }
+
+            else { 
+            return NdsDtd.createStatusDocument(NdsDtd.SL_ERROR, null, ('command: ' + myOps.first().getLocalName() + 'Not valid for this function'))
+                .getDocumentElement()
             }
 
             debugMessage('Serializing document to ByteArray with encoding: ' + myEncoding)

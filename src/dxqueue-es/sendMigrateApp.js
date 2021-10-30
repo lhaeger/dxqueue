@@ -123,33 +123,39 @@ function sendMigrateApp(driverDN, myElement) {
     // function debugMessage
     // function properXDS
     // skeletonXDS
+
+    var supportedOps = 'query|query-ex';
+    // strict processing: can only inject query|query-ex.
+    // as long as the doc is otherwise well formed, it should not crash the engine.
+    var processUnsupportedOps = false
+    var myEncoding = java.nio.charset.StandardCharsets.UTF_8;
+
     if (!(Packages.com.novell.nds.dirxml.engine.DirXML.isExternal())) {
         try {
             debugMessage('Cleaning up supplied XDS');
             var theElement = properXDS(myElement);
             (theElement === myElement) ? debugMessage('Passthru XDS as-is') : debugMessage('Cleaned up XDS')
             //debugMessage('Detected theElement: ' + theElement, debugDefault + 1)
-            var myEncoding = java.nio.charset.StandardCharsets.UTF_8;
             debugMessage('Validating document')
 
             try {
                 if (null == rootDoc) {
                     var rootDoc = theElement.first().getFirstChild().getOwnerDocument()
                 }
-            } catch (e) { debugMessage('First node not found, falling back to first alternate mechanism') }
+            } catch (e) { debugMessage('First node not found, falling back to first alternate mechanism', debugDefault + 1) }
             try {
                 if (null == rootDoc) {
                     var rootDoc = theElement.getFirstChild().getOwnerDocument()
                 }
-            } catch (e) { debugMessage('First node not found, falling back to second alternate mechanism' + e) }
+            } catch (e) { debugMessage('First node not found, falling back to second alternate mechanism' + e, debugDefault + 1) }
             try {
                 if (null == rootDoc) {
                     var rootDoc = theElement.first().getOwnerDocument()
                 }
             } catch (e) { debugMessage('error' + e) }
             if (null == rootDoc) {
-                debugMessage('Trying built-in getOwnerDocument() method as last resort');
-                               var rootDoc = theElement.getOwnerDocument()
+                debugMessage('Trying built-in getOwnerDocument() method as last resort', debugDefault + 1);
+                    var rootDoc = theElement.getOwnerDocument()
             }
             
 
@@ -166,12 +172,16 @@ function sendMigrateApp(driverDN, myElement) {
                     .getDocumentElement()
             }
 
-            if (myOps.first().getLocalName().matches('query|query-ex')) {
+            if (myOps.first().getLocalName().matches(supportedOps)) {
                 debugMessage('Detected known command: ' + myOps.first().getLocalName())
             }
             
+            else if (processUnsupportedOps) {
+                debugMessage('Detected unknown command: ' + myOps.first().getLocalName() + '. Submitting anyway, it may be ignored by the shim ')
+            }
+
             else { 
-            return NdsDtd.createStatusDocument(NdsDtd.SL_ERROR, null, ('command:' + myOps.first().getLocalName() + 'Not valid for this function'))
+            return NdsDtd.createStatusDocument(NdsDtd.SL_ERROR, null, ('command: ' + myOps.first().getLocalName() + 'Not valid for this function'))
                 .getDocumentElement()
             }
 
