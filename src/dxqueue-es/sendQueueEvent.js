@@ -22,7 +22,7 @@ function serializeEx(doc, indent) {
     //requires: java.io.StringWriter
     //requires: com.novell.xml.dom.DOMWriter
     indent = "undefined" !== typeof indent ? !!indent : !0;
-    var sw = new StringWriter;
+    var sw = new StringWriter();
     dw = new DOMWriter(doc, sw);
     dw.setIndent(!!indent);
     dw.write();
@@ -89,6 +89,7 @@ function properXDS(doc) {
             debugMessage('Returning supplied XDS unchanged, already proper XDS', debugDefault + 1)
             return doc;
         }
+        // known valid commands from XDS DTD
         if (null != rootDocNode && rootNodeName.matches('add|modify|modify-password|query|query-ex|rename|move|delete|trigger|sync')) {
             // Merging supplied XDS with wrapper
             debugMessage('Merging supplied XDS with wrapper: ' + rootNodeName, debugDefault + 1)
@@ -152,8 +153,6 @@ function sendQueueEvent(driverDN, myElement) {
             }
 
 
- /* does not work for me, always getting "Nothing to submit!"
- 
             try {
                 if (null == myOps) {
                     var myOps = Packages.com.novell.xml.dom.DOMQuery.query(rootDoc, "//input/*");
@@ -163,19 +162,17 @@ function sendQueueEvent(driverDN, myElement) {
             }
 
              if (null == myOps.first()) {
-                return NdsDtd.createStatusDocument((new java.lang.Integer(2)), null, 'Nothing to submit!')
+                return NdsDtd.createStatusDocument(NdsDtd.SL_WARNING, null, 'Nothing to submit!')
                     .getDocumentElement()
             }
 
-            if (myOps.first().getLocalName().matches('add|modify|modify-password|rename|move|delete|trigger|sync')) {
-                debugMessage('Detected command: ' + myOps.first().getLocalName())
+            if (myOps.first().getLocalName().matches('add|modify|modify-password|rename|move|delete|trigger|sync|statement')) {
+                debugMessage('Detected known command: ' + myOps.first().getLocalName())
             }
 
             else {
-                return NdsDtd.createStatusDocument(NdsDtd.SL_ERROR, null, 'command:' + myOps.first().getLocalName() + ' is not valid for this function')
-                    .getDocumentElement()
+                debugMessage('Detected unknown command: ' + myOps.first().getLocalName() + '. Submitting anyway, it may be ignored by the shim ')
             }
- */
 
             debugMessage('Serializing document to ByteArray with encoding: ' + myEncoding)
             var serializedDoc = serializeEx(rootDoc, false)
@@ -193,7 +190,7 @@ function sendQueueEvent(driverDN, myElement) {
                 debugMessage('Attempting to authenticate to tree');
                 context.authenticate();
                 var currentDriverDN = ThreadGroupVars.get("vrDriverDN");
-                debugMessage('Verifying access to: ' + currentDriverDN);
+                debugMessage('Resolving source driver:' + currentDriverDN);
                 if (null == currentDriverDN) {
                     throw new JCException("getEffectivePriviledges()", -672);
                 }
@@ -202,8 +199,9 @@ function sendQueueEvent(driverDN, myElement) {
                     driverDN = '\\' + treeName + '\\' + driverDN;
                 }
 
-                debugMessage('Verifying access to: ' + driverDN);
+                debugMessage('Verifying target driver exists: ' + driverDN);
                 context.nameToID(1, driverDN);
+                debugMessage('Verifying rights to source driver: ' + currentDriverDN);
                 if ((context.getEffectivePrivileges(currentDriverDN, "[Entry Rights]") & 0x10) == (new java.lang.Long(0))) {
                     throw new JCException("getEffectivePriviledges()", -672);
                 }
@@ -212,7 +210,7 @@ function sendQueueEvent(driverDN, myElement) {
                 var wireCtor = new DxWire();
                 wireCtor.setDnFormat(0);
                 result = sendWireRequest(context, wireCtor.constructQueueEvent(driverDN, bytes));
-                output = NdsDtd.createStatusDocument(NdsDtd.SL_SUCCESS, null, 'Submitted document for execution on subscriber channel on driver: ' + currentDriverDN)
+                output = NdsDtd.createStatusDocument(NdsDtd.SL_SUCCESS, null, 'Submitted document for execution on subscriber channel on driver: ' + driverDN)
                     .getDocumentElement()
             }
 
