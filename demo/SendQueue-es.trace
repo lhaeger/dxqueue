@@ -1,0 +1,348 @@
+[10/31/21 12:56:08.717]:SendQueueEvent ST:Start transaction.
+[10/31/21 12:56:08.717]:SendQueueEvent ST:Processing events for transaction.
+[10/31/21 12:56:08.718]:SendQueueEvent ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2">
+      <modify-attr attr-name="Given Name">
+        <remove-value>
+          <value timestamp="1635684963#2" type="string">dsque-test</value>
+        </remove-value>
+        <add-value>
+          <value timestamp="1635684968#2" type="string">dsqueue-test</value>
+        </add-value>
+      </modify-attr>
+    </modify>
+  </input>
+</nds>
+[10/31/21 12:56:08.719]:SendQueueEvent ST:Applying event transformation policies.
+[10/31/21 12:56:08.719]:SendQueueEvent ST:Applying policy: %+C%14CSend Queue Event%-C.
+[10/31/21 12:56:08.720]:SendQueueEvent ST:  Applying to modify #1.
+[10/31/21 12:56:08.720]:SendQueueEvent ST:    Evaluating selection criteria for rule 'Capture Event'.
+[10/31/21 12:56:08.720]:SendQueueEvent ST:      (if-global-variable 'drv.action.queueEvent' available) = TRUE.
+[10/31/21 12:56:08.720]:SendQueueEvent ST:    Rule selected.
+[10/31/21 12:56:08.720]:SendQueueEvent ST:    Applying rule 'Capture Event'.
+[10/31/21 12:56:08.722]:SendQueueEvent ST:      Action: do-set-local-variable("OPERATION",scope="policy",token-replace-all(">","&gt;",token-replace-all("<","&lt;",token-xml-serialize(token-xpath("."))))).
+[10/31/21 12:56:08.722]:SendQueueEvent ST:        arg-string(token-replace-all(">","&gt;",token-replace-all("<","&lt;",token-xml-serialize(token-xpath(".")))))
+[10/31/21 12:56:08.723]:SendQueueEvent ST:          token-replace-all(">","&gt;",token-replace-all("<","&lt;",token-xml-serialize(token-xpath("."))))
+[10/31/21 12:56:08.723]:SendQueueEvent ST:            token-replace-all(">","&gt;",token-replace-all("<","&lt;",token-xml-serialize(token-xpath("."))))
+[10/31/21 12:56:08.724]:SendQueueEvent ST:              token-replace-all("<","&lt;",token-xml-serialize(token-xpath(".")))
+[10/31/21 12:56:08.724]:SendQueueEvent ST:                token-replace-all("<","&lt;",token-xml-serialize(token-xpath(".")))
+[10/31/21 12:56:08.724]:SendQueueEvent ST:                  token-xml-serialize(token-xpath("."))
+[10/31/21 12:56:08.724]:SendQueueEvent ST:                    token-xml-serialize(token-xpath("."))
+[10/31/21 12:56:08.724]:SendQueueEvent ST:                      token-xpath(".")
+[10/31/21 12:56:08.724]:SendQueueEvent ST:                      Token Value: {<modify> @cached-time = "20211031125608.697Z" @class-name = "User" @event-id = "b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" @qualified-src-dn = "O=data\OU=users\CN=employee2" @src-dn = "\IDVP\data\users\employee2" @src-entry-id = "33766" @timestamp = "1635684968#2"}.
+[10/31/21 12:56:08.725]:SendQueueEvent ST:                      Arg Value: {<modify> @cached-time = "20211031125608.697Z" @class-name = "User" @event-id = "b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" @qualified-src-dn = "O=data\OU=users\CN=employee2" @src-dn = "\IDVP\data\users\employee2" @src-entry-id = "33766" @timestamp = "1635684968#2"}.
+[10/31/21 12:56:08.726]:SendQueueEvent ST:                    Token Value: "<modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2">
+	<modify-attr attr-name="Given Name">
+		<remove-value>
+			<value timestamp="1635684963#2" type="string">dsque-test</value>
+		</remove-value>
+		<add-value>
+			<value timestamp="1635684968#2" type="string">dsqueue-test</value>
+		</add-value>
+	</modify-attr>
+</modify>".
+[10/31/21 12:56:08.727]:SendQueueEvent ST:                  Arg Value: "<modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2">
+	<modify-attr attr-name="Given Name">
+		<remove-value>
+			<value timestamp="1635684963#2" type="string">dsque-test</value>
+		</remove-value>
+		<add-value>
+			<value timestamp="1635684968#2" type="string">dsqueue-test</value>
+		</add-value>
+	</modify-attr>
+</modify>".
+[10/31/21 12:56:08.727]:SendQueueEvent ST:                Token Value: "&lt;modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2">
+	&lt;modify-attr attr-name="Given Name">
+		&lt;remove-value>
+			&lt;value timestamp="1635684963#2" type="string">dsque-test&lt;/value>
+		&lt;/remove-value>
+		&lt;add-value>
+			&lt;value timestamp="1635684968#2" type="string">dsqueue-test&lt;/value>
+		&lt;/add-value>
+	&lt;/modify-attr>
+&lt;/modify>".
+[10/31/21 12:56:08.728]:SendQueueEvent ST:              Arg Value: "&lt;modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2">
+	&lt;modify-attr attr-name="Given Name">
+		&lt;remove-value>
+			&lt;value timestamp="1635684963#2" type="string">dsque-test&lt;/value>
+		&lt;/remove-value>
+		&lt;add-value>
+			&lt;value timestamp="1635684968#2" type="string">dsqueue-test&lt;/value>
+		&lt;/add-value>
+	&lt;/modify-attr>
+&lt;/modify>".
+[10/31/21 12:56:08.729]:SendQueueEvent ST:            Token Value: "&lt;modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2"&gt;
+	&lt;modify-attr attr-name="Given Name"&gt;
+		&lt;remove-value&gt;
+			&lt;value timestamp="1635684963#2" type="string"&gt;dsque-test&lt;/value&gt;
+		&lt;/remove-value&gt;
+		&lt;add-value&gt;
+			&lt;value timestamp="1635684968#2" type="string"&gt;dsqueue-test&lt;/value&gt;
+		&lt;/add-value&gt;
+	&lt;/modify-attr&gt;
+&lt;/modify&gt;".
+[10/31/21 12:56:08.730]:SendQueueEvent ST:          Arg Value: "&lt;modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2"&gt;
+	&lt;modify-attr attr-name="Given Name"&gt;
+		&lt;remove-value&gt;
+			&lt;value timestamp="1635684963#2" type="string"&gt;dsque-test&lt;/value&gt;
+		&lt;/remove-value&gt;
+		&lt;add-value&gt;
+			&lt;value timestamp="1635684968#2" type="string"&gt;dsqueue-test&lt;/value&gt;
+		&lt;/add-value&gt;
+	&lt;/modify-attr&gt;
+&lt;/modify&gt;".
+[10/31/21 12:56:08.731]:SendQueueEvent ST:      Action: do-set-local-variable("XDS",scope="policy",arg-node-set(token-xml-parse("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>"+"INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('"+token-attr("CN")+"','"+token-xpath("@event-id")+"','"+token-local-variable("OPERATION")+"')</jdbc:sql></jdbc:statement></input></nds>"))).
+[10/31/21 12:56:08.732]:SendQueueEvent ST:        arg-node-set(token-xml-parse("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>"+"INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('"+token-attr("CN")+"','"+token-xpath("@event-id")+"','"+token-local-variable("OPERATION")+"')</jdbc:sql></jdbc:statement></input></nds>"))
+[10/31/21 12:56:08.732]:SendQueueEvent ST:          token-xml-parse("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>"+"INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('"+token-attr("CN")+"','"+token-xpath("@event-id")+"','"+token-local-variable("OPERATION")+"')</jdbc:sql></jdbc:statement></input></nds>")
+[10/31/21 12:56:08.733]:SendQueueEvent ST:            token-xml-parse("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>"+"INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('"+token-attr("CN")+"','"+token-xpath("@event-id")+"','"+token-local-variable("OPERATION")+"')</jdbc:sql></jdbc:statement></input></nds>")
+[10/31/21 12:56:08.733]:SendQueueEvent ST:              token-text("<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>")
+[10/31/21 12:56:08.734]:SendQueueEvent ST:              token-text("INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('")
+[10/31/21 12:56:08.734]:SendQueueEvent ST:              token-attr("CN")
+[10/31/21 12:56:08.734]:SendQueueEvent ST:                Query from policy
+[10/31/21 12:56:08.734]:SendQueueEvent ST:                
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <query class-name="User" dest-dn="\IDVP\data\users\employee2" dest-entry-id="33766" scope="entry">
+      <read-attr attr-name="CN"/>
+    </query>
+  </input>
+</nds>
+[10/31/21 12:56:08.735]:SendQueueEvent ST:                Pumping XDS to eDirectory.
+[10/31/21 12:56:08.735]:SendQueueEvent ST:                Performing operation query for \IDVP\data\users\employee2.
+[10/31/21 12:56:08.735]:SendQueueEvent ST:                --JCLNT-- \IDVP\system\driverset1\SendQueueEvent : Duplicating : context = 760807589, tempContext = 760807600
+[10/31/21 12:56:08.736]:SendQueueEvent ST:                --JCLNT-- \IDVP\system\driverset1\SendQueueEvent : Calling free on tempContext = 760807600
+[10/31/21 12:56:08.736]:SendQueueEvent ST:                Query from policy result
+[10/31/21 12:56:08.736]:SendQueueEvent ST:                
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <output>
+    <instance class-name="User" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766">
+      <attr attr-name="CN">
+        <value naming="true" timestamp="1634841162#23" type="string">employee2</value>
+      </attr>
+    </instance>
+    <status level="success"></status>
+  </output>
+</nds>
+[10/31/21 12:56:08.737]:SendQueueEvent ST:                Token Value: "employee2".
+[10/31/21 12:56:08.737]:SendQueueEvent ST:              token-text("','")
+[10/31/21 12:56:08.737]:SendQueueEvent ST:              token-xpath("@event-id")
+[10/31/21 12:56:08.737]:SendQueueEvent ST:                Token Value: "b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2".
+[10/31/21 12:56:08.737]:SendQueueEvent ST:              token-text("','")
+[10/31/21 12:56:08.737]:SendQueueEvent ST:              token-local-variable("OPERATION")
+[10/31/21 12:56:08.738]:SendQueueEvent ST:                Token Value: "&lt;modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2"&gt;
+	&lt;modify-attr attr-name="Given Name"&gt;
+		&lt;remove-value&gt;
+			&lt;value timestamp="1635684963#2" type="string"&gt;dsque-test&lt;/value&gt;
+		&lt;/remove-value&gt;
+		&lt;add-value&gt;
+			&lt;value timestamp="1635684968#2" type="string"&gt;dsqueue-test&lt;/value&gt;
+		&lt;/add-value&gt;
+	&lt;/modify-attr&gt;
+&lt;/modify&gt;".
+[10/31/21 12:56:08.738]:SendQueueEvent ST:              token-text("')</jdbc:sql></jdbc:statement></input></nds>")
+[10/31/21 12:56:08.739]:SendQueueEvent ST:              Arg Value: "<nds><input xmlns:jdbc="urn:dirxml:jdbc"><jdbc:statement jdbc:type="update"><jdbc:sql>INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('employee2','b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2','&lt;modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2"&gt;
+	&lt;modify-attr attr-name="Given Name"&gt;
+		&lt;remove-value&gt;
+			&lt;value timestamp="1635684963#2" type="string"&gt;dsque-test&lt;/value&gt;
+		&lt;/remove-value&gt;
+		&lt;add-value&gt;
+			&lt;value timestamp="1635684968#2" type="string"&gt;dsqueue-test&lt;/value&gt;
+		&lt;/add-value&gt;
+	&lt;/modify-attr&gt;
+&lt;/modify&gt;')</jdbc:sql></jdbc:statement></input></nds>".
+[10/31/21 12:56:08.740]:SendQueueEvent ST:          Token Value: {/}.
+[10/31/21 12:56:08.740]:SendQueueEvent ST:          Arg Value: {/}.
+[10/31/21 12:56:08.740]:SendQueueEvent ST:      Action: do-set-local-variable("DriverDN",scope="policy",token-parse-dn(dest-dn-format="slash",length="-2",src-dn-format="slash","\IDVP\system\driverset1\SendQueueEvent")+"\JDBC").
+[10/31/21 12:56:08.740]:SendQueueEvent ST:        arg-string(token-parse-dn(dest-dn-format="slash",length="-2",src-dn-format="slash","\IDVP\system\driverset1\SendQueueEvent")+"\JDBC")
+[10/31/21 12:56:08.741]:SendQueueEvent ST:          token-parse-dn(dest-dn-format="slash",length="-2",src-dn-format="slash","\IDVP\system\driverset1\SendQueueEvent")
+[10/31/21 12:56:08.741]:SendQueueEvent ST:            token-parse-dn(dest-dn-format="slash",length="-2",src-dn-format="slash","\IDVP\system\driverset1\SendQueueEvent")
+[10/31/21 12:56:08.741]:SendQueueEvent ST:              token-text("\IDVP\system\driverset1\SendQueueEvent")
+[10/31/21 12:56:08.741]:SendQueueEvent ST:              Arg Value: "\IDVP\system\driverset1\SendQueueEvent".
+[10/31/21 12:56:08.742]:SendQueueEvent ST:            Token Value: "\IDVP\system\driverset1".
+[10/31/21 12:56:08.742]:SendQueueEvent ST:          token-text("\JDBC")
+[10/31/21 12:56:08.742]:SendQueueEvent ST:          Arg Value: "\IDVP\system\driverset1\JDBC".
+[10/31/21 12:56:08.742]:SendQueueEvent ST:      Action: do-if().
+[10/31/21 12:56:08.742]:SendQueueEvent ST:        Evaluating conditions.
+[10/31/21 12:56:08.742]:SendQueueEvent ST:          (if-global-variable 'drv.action.queueEvent' equal "use-es") = TRUE.
+[10/31/21 12:56:08.742]:SendQueueEvent ST:        Performing if actions.
+[10/31/21 12:56:08.742]:SendQueueEvent ST:          Action: do-set-local-variable("CmdResult",scope="policy",arg-node-set(token-xpath("es:sendQueueEvent($DriverDN, $XDS/nds)"))).
+[10/31/21 12:56:08.743]:SendQueueEvent ST:            arg-node-set(token-xpath("es:sendQueueEvent($DriverDN, $XDS/nds)"))
+[10/31/21 12:56:08.743]:SendQueueEvent ST:              token-xpath("es:sendQueueEvent($DriverDN, $XDS/nds)")
+[10/31/21 12:56:08.743]:SendQueueEvent ST:                sendQueueEvent: Cleaning up supplied XDS
+[10/31/21 12:56:08.743]:SendQueueEvent ST:                sendQueueEvent: Document root node: nds
+[10/31/21 12:56:08.743]:SendQueueEvent ST:                sendQueueEvent: Passthru XDS as-is
+[10/31/21 12:56:08.743]:SendQueueEvent ST:                sendQueueEvent: Validating document
+[10/31/21 12:56:08.744]:SendQueueEvent ST:                sendQueueEvent: Detected known command: statement
+[10/31/21 12:56:08.744]:SendQueueEvent ST:                sendQueueEvent: Serializing document to ByteArray with encoding: UTF-8
+[10/31/21 12:56:08.744]:SendQueueEvent ST:                sendQueueEvent: Detected tree name: IDVP
+[10/31/21 12:56:08.744]:SendQueueEvent ST:                sendQueueEvent: Attempting to authenticate to tree
+[10/31/21 12:56:08.744]:SendQueueEvent ST:                sendQueueEvent: Resolving source driver:\IDVP\system\driverset1\SendQueueEvent
+[10/31/21 12:56:08.745]:SendQueueEvent ST:                sendQueueEvent: Verifying target driver exists: \IDVP\system\driverset1\JDBC
+[10/31/21 12:56:08.745]:SendQueueEvent ST:                sendQueueEvent: Verifying rights to source driver: \IDVP\system\driverset1\SendQueueEvent
+[10/31/21 12:56:08.745]:SendQueueEvent ST:                sendQueueEvent: Queuing supplied XDS
+[10/31/21 12:56:08.749]:SendQueueEvent ST:              Token Value: {<nds> @dtdversion = "4.0" @ndsversion = "8.x"}.
+[10/31/21 12:56:08.749]:SendQueueEvent ST:              Arg Value: {<nds> @dtdversion = "4.0" @ndsversion = "8.x"}.
+[10/31/21 12:56:08.749]:SendQueueEvent ST:      Action: do-if().
+[10/31/21 12:56:08.749]:SendQueueEvent ST:        Evaluating conditions.
+[10/31/21 12:56:08.750]:SendQueueEvent ST:          (if-global-variable 'drv.action.queueEvent' equal "use-jar") = FALSE.
+[10/31/21 12:56:08.750]:SendQueueEvent ST:      Action: do-trace-message(token-xml-serialize(token-xpath("$CmdResult//status"))).
+[10/31/21 12:56:08.750]:SendQueueEvent ST:        arg-string(token-xml-serialize(token-xpath("$CmdResult//status")))
+[10/31/21 12:56:08.750]:SendQueueEvent ST:          token-xml-serialize(token-xpath("$CmdResult//status"))
+[10/31/21 12:56:08.750]:SendQueueEvent ST:            token-xml-serialize(token-xpath("$CmdResult//status"))
+[10/31/21 12:56:08.750]:SendQueueEvent ST:              token-xpath("$CmdResult//status")
+[10/31/21 12:56:08.751]:SendQueueEvent ST:              Token Value: {<status> @level = "success"}.
+[10/31/21 12:56:08.751]:SendQueueEvent ST:              Arg Value: {<status> @level = "success"}.
+[10/31/21 12:56:08.751]:SendQueueEvent ST:            Token Value: "<status level="success">Submitted document for execution on subscriber channel on driver: \IDVP\system\driverset1\JDBC</status>".
+[10/31/21 12:56:08.752]:SendQueueEvent ST:          Arg Value: "<status level="success">Submitted document for execution on subscriber channel on driver: \IDVP\system\driverset1\JDBC</status>".
+[10/31/21 12:56:08.752]:SendQueueEvent ST:<status level="success">Submitted document for execution on subscriber channel on driver: \IDVP\system\driverset1\JDBC</status>
+[10/31/21 12:56:08.752]:SendQueueEvent ST:Policy returned:
+[10/31/21 12:56:08.752]:SendQueueEvent ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <modify cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2">
+      <modify-attr attr-name="Given Name">
+        <remove-value>
+          <value timestamp="1635684963#2" type="string">dsque-test</value>
+        </remove-value>
+        <add-value>
+          <value timestamp="1635684968#2" type="string">dsqueue-test</value>
+        </add-value>
+      </modify-attr>
+    </modify>
+  </input>
+</nds>
+[10/31/21 12:56:08.753]:SendQueueEvent ST:Subscriber processing modify for \IDVP\data\users\employee2.
+[10/31/21 12:56:08.754]:SendQueueEvent ST:Converting <modify> to <add>
+[10/31/21 12:56:08.754]:SendQueueEvent ST:Reading relevant attributes from \IDVP\data\users\employee2.
+[10/31/21 12:56:08.754]:SendQueueEvent ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <query class-name="User" dest-dn="\IDVP\data\users\employee2" dest-entry-id="33766" scope="entry">
+      <read-attr attr-name="CN"/>
+      <read-attr attr-name="Given Name"/>
+      <read-attr attr-name="Surname"/>
+    </query>
+  </input>
+</nds>
+[10/31/21 12:56:08.755]:SendQueueEvent ST:Pumping XDS to eDirectory.
+[10/31/21 12:56:08.755]:SendQueueEvent ST:Performing operation query for \IDVP\data\users\employee2.
+[10/31/21 12:56:08.755]:SendQueueEvent ST:--JCLNT-- \IDVP\system\driverset1\SendQueueEvent : Duplicating : context = 760807589, tempContext = 760807600
+[10/31/21 12:56:08.756]:SendQueueEvent ST:--JCLNT-- \IDVP\system\driverset1\SendQueueEvent : Calling free on tempContext = 760807600
+[10/31/21 12:56:08.756]:SendQueueEvent ST:Read result:
+[10/31/21 12:56:08.756]:SendQueueEvent ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <output>
+    <instance class-name="User" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766">
+      <attr attr-name="CN">
+        <value naming="true" timestamp="1634841162#23" type="string">employee2</value>
+      </attr>
+      <attr attr-name="Given Name">
+        <value timestamp="1635684968#2" type="string">dsqueue-test</value>
+      </attr>
+      <attr attr-name="Surname">
+        <value timestamp="1634841162#3" type="string">Employee</value>
+      </attr>
+    </instance>
+    <status level="success"></status>
+  </output>
+</nds>
+[10/31/21 12:56:08.757]:SendQueueEvent ST:Synthetic add:
+[10/31/21 12:56:08.757]:SendQueueEvent ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <add cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2">
+      <add-attr attr-name="CN">
+        <value naming="true" timestamp="1634841162#23" type="string">employee2</value>
+      </add-attr>
+      <add-attr attr-name="Given Name">
+        <value timestamp="1635684968#2" type="string">dsqueue-test</value>
+      </add-attr>
+      <add-attr attr-name="Surname">
+        <value timestamp="1634841162#3" type="string">Employee</value>
+      </add-attr>
+    </add>
+  </input>
+</nds>
+[10/31/21 12:56:08.758]:SendQueueEvent ST:No object matching policies.
+[10/31/21 12:56:08.758]:SendQueueEvent ST:No object creation policies.
+[10/31/21 12:56:08.758]:SendQueueEvent ST:No object placement policies.
+[10/31/21 12:56:08.759]:SendQueueEvent ST:Submitting add to subscriber shim.
+[10/31/21 12:56:08.759]:SendQueueEvent ST:No command transformation policies.
+[10/31/21 12:56:08.759]:SendQueueEvent ST:Filtering out notification-only attributes.
+[10/31/21 12:56:08.759]:SendQueueEvent ST:Fixing up association references.
+[10/31/21 12:56:08.759]:SendQueueEvent ST:No schema mapping policies.
+[10/31/21 12:56:08.759]:SendQueueEvent ST:No output transformation policies.
+[10/31/21 12:56:08.759]:SendQueueEvent ST:Submitting document to subscriber shim:
+[10/31/21 12:56:08.759]:SendQueueEvent ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <add cached-time="20211031125608.697Z" class-name="User" event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" qualified-src-dn="O=data\OU=users\CN=employee2" src-dn="\IDVP\data\users\employee2" src-entry-id="33766" timestamp="1635684968#2">
+      <add-attr attr-name="CN">
+        <value naming="true" timestamp="1634841162#23" type="string">employee2</value>
+      </add-attr>
+      <add-attr attr-name="Given Name">
+        <value timestamp="1635684968#2" type="string">dsqueue-test</value>
+      </add-attr>
+      <add-attr attr-name="Surname">
+        <value timestamp="1634841162#3" type="string">Employee</value>
+      </add-attr>
+    </add>
+  </input>
+</nds>
+[10/31/21 12:56:08.761]:SendQueueEvent ST:SubscriptionShim.execute() returned:
+[10/31/21 12:56:08.761]:SendQueueEvent ST:
+<nds dtdversion="4.0">
+  <source>
+    <product build="20210726_032919" instance="SendQueueEvent" version="4.8.4.0">DirXML Null Driver</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <output>
+    <status event-id="b5fd30f29e6f#20211031125608#1#1:4b7da613-d2d2-4075-b9ab-13a67d4bd2d2" level="success"/>
+  </output>
+</nds>
+[10/31/21 12:56:08.761]:SendQueueEvent ST:No input transformation policies.
+[10/31/21 12:56:08.761]:SendQueueEvent ST:No schema mapping policies.
+[10/31/21 12:56:08.761]:SendQueueEvent ST:Resolving association references.
+[10/31/21 12:56:08.762]:SendQueueEvent ST:Processing returned document.
+[10/31/21 12:56:08.762]:SendQueueEvent ST:Processing operation <status> for .
+[10/31/21 12:56:08.762]:SendQueueEvent ST:
+DirXML Log Event -------------------
+     Driver:   \IDVP\system\driverset1\SendQueueEvent
+     Channel:  Subscriber
+     Object:   \IDVP\data\users\employee2
+     Status:   Success
+[10/31/21 12:56:08.762]:SendQueueEvent ST:End transaction.
