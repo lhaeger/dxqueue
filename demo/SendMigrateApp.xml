@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><driver-configuration dn="cn=SendQueueEvent,cn=driverset1,o=system" driver-set-dn="cn=driverset1,o=system" name="SendQueueEvent">
+<?xml version="1.0" encoding="UTF-8"?><driver-configuration dn="cn=SendMigrateApp,cn=driverset1,o=system" driver-set-dn="cn=driverset1,o=system" name="SendMigrateApp">
 	<attributes>
 		<configuration-manifest>
 			<manifest/>
@@ -21,8 +21,8 @@
 		<log-limit inherit="true"/>
 		<java-module value="com.novell.nds.dirxml.driver.nulldriver.NullDriverShim"/>
 		<policy-linkage>
-			<linkage-item dn="cn=sendQueueEvent,cn=Library,cn=driverset1,o=system" order="0" policy-set="3" policy-set-name="ECMAScript"/>
-			<linkage-item dn="cn=Send Queue Event,cn=Subscriber,cn=SendQueueEvent,cn=driverset1,o=system" order="0" policy-set="4" policy-set-name="Subscriber Event"/>
+			<linkage-item dn="cn=sendMigrateApp,cn=Library,cn=driverset1,o=system" order="0" policy-set="3" policy-set-name="ECMAScript"/>
+			<linkage-item dn="cn=Send Migrate App,cn=Subscriber,cn=SendMigrateApp,cn=driverset1,o=system" order="0" policy-set="4" policy-set-name="Subscriber Event"/>
 		</policy-linkage>
 		<driver-cache-limit value="0"/>
 		<shim-auth-password-query/>
@@ -65,43 +65,87 @@
 		<subscriber name="Subscriber">
 			<attributes/>
 			<children>
-				<rule name="Send Queue Event">
-					<policy xmlns:dxqueue="http://www.novell.com/nxsl/java/dxqueue.send">
+				<rule name="Send Migrate App">
+					<policy>
 						<rule>
-							<description>Capture Event</description>
-							<comment xml:space="preserve">This policy will capture the incoming event, and generate a XDS Message to put onto the other driver.  This example will create a JDBC Message and log it to the database using the other driver.
-There are a few tricks, one is to serialize the incoming XDS, and do a Search and Replace of all the &lt; and > into &amp;gt; and &amp;lt;.  Plus the DriverDN must include the full TreeName.  Lastly the sendQueueEvent will return a Nodeset so you must set the variable type to be a nodeset</comment>
+							<description>Query Event</description>
+							<comment xml:space="preserve">This policy will trigger on an incoming event, and generate a XDS Message to put onto the other driver.  In this scenario, it does the following: 
+- Create a query document
+- Inject it into the other driver tagged as a "Migrate From App" query.
+- Any resulting instance will be turned into a sync by the engine.
+
+There are a few tricks:
+- DriverDN must include the full TreeName.
+- sendMigrateApp will return a Nodeset so you must set the variable type to be a nodeset. - Resulting nodeset can be parsed to determine if the queue event request was successful or not. This does not indicate whether the query ran successfully, only that the queue event was successful.
+- Target driver can be same driver, or another driver. (not yet tested injecting events for drivers that run on another server in driverset)
+- Target driver does not have to be running, but it cannot be disabled.</comment>
 							<conditions>
 								<and>
 									<if-global-variable name="drv.action.queueEvent" op="available"/>
 								</and>
 							</conditions>
 							<actions>
-								<do-set-local-variable name="OPERATION" scope="policy">
-									<arg-string>
-										<token-replace-all regex=">" replace-with="&amp;gt;">
-											<token-replace-all regex="&lt;" replace-with="&amp;lt;">
-												<token-xml-serialize>
-													<token-xpath expression="."/>
-												</token-xml-serialize>
-											</token-replace-all>
-										</token-replace-all>
-									</arg-string>
-								</do-set-local-variable>
-								<do-set-local-variable name="XDS" scope="policy">
+								<do-set-local-variable name="attrsToClone" notrace="true" scope="policy">
 									<arg-node-set>
-										<token-xml-parse>
-											<token-text xml:space="preserve">&lt;nds>&lt;input xmlns:jdbc="urn:dirxml:jdbc">&lt;jdbc:statement jdbc:type="update">&lt;jdbc:sql></token-text>
-											<token-text xml:space="preserve">INSERT INTO AUDIT(CN,EVENTID,XDS) VALUES ('</token-text>
-											<token-attr name="CN"/>
-											<token-text xml:space="preserve">','</token-text>
-											<token-xpath expression="@event-id"/>
-											<token-text xml:space="preserve">','</token-text>
-											<token-local-variable name="OPERATION"/>
-											<token-text xml:space="preserve">')&lt;/jdbc:sql>&lt;/jdbc:statement>&lt;/input>&lt;/nds></token-text>
-										</token-xml-parse>
+										<token-split csv="true" delimiter=",">
+											<token-text xml:space="preserve">cached-time,class-id,class-name,timestamp</token-text>
+										</token-split>
 									</arg-node-set>
 								</do-set-local-variable>
+								<do-append-xml-element expression=".." name="query"/>
+								<do-for-each>
+									<arg-node-set>
+										<token-xpath expression="../query[last()]"/>
+									</arg-node-set>
+									<arg-actions>
+										<do-set-local-variable name="parent-node" scope="policy">
+											<arg-node-set>
+												<token-local-variable name="current-node"/>
+											</arg-node-set>
+										</do-set-local-variable>
+										<do-set-xml-attr expression="$current-node" name="event-id">
+											<arg-string>
+												<token-text xml:space="preserve">migrateQuery:trigger</token-text>
+											</arg-string>
+										</do-set-xml-attr>
+										<do-clone-xpath dest-expression="$current-node" notrace="true" src-expression="@*[name()=$attrsToClone]"/>
+										<do-set-xml-attr expression="$current-node" name="scope">
+											<arg-string>
+												<token-text xml:space="preserve">entry</token-text>
+											</arg-string>
+										</do-set-xml-attr>
+										<do-clone-xpath dest-expression="$current-node" notrace="true" src-expression="$current-op/association"/>
+										<do-append-xml-element before="*[1]" expression="$current-node" name="search-attr" notrace="true"/>
+										<do-set-xml-attr expression="$current-node/search-attr" name="attr-name">
+											<arg-string>
+												<token-text xml:space="preserve">CN</token-text>
+											</arg-string>
+										</do-set-xml-attr>
+										<do-append-xml-element before="*[1]" expression="$current-node/search-attr[last()]" name="value" notrace="true"/>
+										<do-append-xml-text expression="$current-node/search-attr[last()]/value[last()]">
+											<arg-string>
+												<token-src-name/>
+											</arg-string>
+										</do-append-xml-text>
+										<do-set-local-variable name="varQueryXDS-ns" scope="policy">
+											<arg-node-set>
+												<token-xml-parse>
+													<token-xml-serialize>
+														<token-xpath expression="$current-node" notrace="true"/>
+													</token-xml-serialize>
+												</token-xml-parse>
+											</arg-node-set>
+										</do-set-local-variable>
+										<do-strip-xpath expression="$current-node"/>
+									</arg-actions>
+								</do-for-each>
+								<do-trace-message>
+									<arg-string>
+										<token-xml-serialize>
+											<token-local-variable name="varQueryXDS-ns"/>
+										</token-xml-serialize>
+									</arg-string>
+								</do-trace-message>
 								<do-set-local-variable name="DriverDN" scope="policy">
 									<arg-string>
 										<token-parse-dn dest-dn-format="slash" length="-2" src-dn-format="slash">
@@ -119,7 +163,7 @@ There are a few tricks, one is to serialize the incoming XDS, and do a Search an
 									<arg-actions>
 										<do-set-local-variable name="CmdResult" scope="policy">
 											<arg-node-set>
-												<token-xpath expression="es:sendQueueEvent($DriverDN, $XDS/nds)"/>
+												<token-xpath expression="es:sendMigrateApp($DriverDN, $varQueryXDS-ns)"/>
 											</arg-node-set>
 										</do-set-local-variable>
 									</arg-actions>
@@ -131,12 +175,18 @@ There are a few tricks, one is to serialize the incoming XDS, and do a Search an
 										</and>
 									</arg-conditions>
 									<arg-actions>
-										<do-set-local-variable name="CmdResult" scope="policy">
+										<do-trace-message>
+											<arg-string>
+												<token-text xml:space="preserve">Not yet supported, use ECMAScript version instead</token-text>
+											</arg-string>
+										</do-trace-message>
+										<do-set-local-variable disabled="true" name="CmdResult" scope="policy">
 											<arg-node-set>
-												<token-xpath expression="dxqueue:sendQueueEvent($DriverDN, $XDS/nds)"/>
+												<token-xpath expression="dxmigrate:sendMigrateApp($DriverDN, $varQueryXDS-ns)"/>
 											</arg-node-set>
 										</do-set-local-variable>
 									</arg-actions>
+									<arg-actions/>
 								</do-if>
 								<do-trace-message>
 									<arg-string>
