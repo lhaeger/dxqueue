@@ -1,0 +1,298 @@
+[11/01/21 15:52:14.975]:SendMigrateApp ST:Start transaction.
+[11/01/21 15:52:14.975]:SendMigrateApp ST:Processing events for transaction.
+[11/01/21 15:52:14.977]:SendMigrateApp ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <modify cached-time="20211101155214.898Z" class-name="User" event-id="b5fd30f29e6f#20211101155214#1#1:2857c6c4-2fd0-4212-8f5a-c4c65728d02f" qualified-src-dn="O=data\OU=users\CN=employee1" src-dn="\IDVP\data\users\employee1" src-entry-id="33767" timestamp="1635781934#2">
+      <modify-attr attr-name="Given Name">
+        <remove-value>
+          <value timestamp="1635781912#2" type="string">HR-JAR</value>
+        </remove-value>
+        <add-value>
+          <value timestamp="1635781934#2" type="string">HR-JAR2</value>
+        </add-value>
+      </modify-attr>
+    </modify>
+  </input>
+</nds>
+[11/01/21 15:52:14.979]:SendMigrateApp ST:Applying event transformation policies.
+[11/01/21 15:52:14.979]:SendMigrateApp ST:Applying policy: %+C%14CSend Migrate App%-C.
+[11/01/21 15:52:14.979]:SendMigrateApp ST:  Applying to modify #1.
+[11/01/21 15:52:14.979]:SendMigrateApp ST:    Evaluating selection criteria for rule 'Query Event'.
+[11/01/21 15:52:14.980]:SendMigrateApp ST:      (if-global-variable 'drv.action.queueEvent' available) = TRUE.
+[11/01/21 15:52:14.980]:SendMigrateApp ST:    Rule selected.
+[11/01/21 15:52:14.980]:SendMigrateApp ST:    Applying rule 'Query Event'.
+[11/01/21 15:52:14.980]:SendMigrateApp ST:      Action: do-set-local-variable("attrsToClone",notrace="true",scope="policy",arg-node-set(token-split(",",csv="true","cached-time,class-id,class-name,timestamp"))).
+[11/01/21 15:52:14.981]:SendMigrateApp ST:        -- trace suppressed --
+[11/01/21 15:52:14.981]:SendMigrateApp ST:      Action: do-append-xml-element("query","..").
+[11/01/21 15:52:14.982]:SendMigrateApp ST:      Action: do-for-each(arg-node-set(token-xpath("../query[last()]"))).
+[11/01/21 15:52:14.982]:SendMigrateApp ST:        arg-node-set(token-xpath("../query[last()]"))
+[11/01/21 15:52:14.982]:SendMigrateApp ST:          token-xpath("../query[last()]")
+[11/01/21 15:52:14.982]:SendMigrateApp ST:          Token Value: {<query>}.
+[11/01/21 15:52:14.982]:SendMigrateApp ST:          Arg Value: {<query>}.
+[11/01/21 15:52:14.982]:SendMigrateApp ST:        Performing actions for local-variable(current-node) = <query>.
+[11/01/21 15:52:14.983]:SendMigrateApp ST:          Action: do-set-local-variable("parent-node",scope="policy",arg-node-set(token-local-variable("current-node"))).
+[11/01/21 15:52:14.983]:SendMigrateApp ST:            arg-node-set(token-local-variable("current-node"))
+[11/01/21 15:52:14.983]:SendMigrateApp ST:              token-local-variable("current-node")
+[11/01/21 15:52:14.983]:SendMigrateApp ST:              Token Value: {<query>}.
+[11/01/21 15:52:14.984]:SendMigrateApp ST:              Arg Value: {<query>}.
+[11/01/21 15:52:14.984]:SendMigrateApp ST:          Action: do-set-xml-attr("event-id","$current-node","migrateQuery:trigger").
+[11/01/21 15:52:14.984]:SendMigrateApp ST:            arg-string("migrateQuery:trigger")
+[11/01/21 15:52:14.984]:SendMigrateApp ST:              token-text("migrateQuery:trigger")
+[11/01/21 15:52:14.984]:SendMigrateApp ST:              Arg Value: "migrateQuery:trigger".
+[11/01/21 15:52:14.984]:SendMigrateApp ST:          Action: do-clone-xpath(dest-expression="$current-node",notrace="true",src-expression="@*[name()=$attrsToClone]").
+[11/01/21 15:52:14.985]:SendMigrateApp ST:          Action: do-set-xml-attr("scope","$current-node","entry").
+[11/01/21 15:52:14.985]:SendMigrateApp ST:            arg-string("entry")
+[11/01/21 15:52:14.985]:SendMigrateApp ST:              token-text("entry")
+[11/01/21 15:52:14.985]:SendMigrateApp ST:              Arg Value: "entry".
+[11/01/21 15:52:14.986]:SendMigrateApp ST:          Action: do-clone-xpath(dest-expression="$current-node",notrace="true",src-expression="$current-op/association").
+[11/01/21 15:52:14.986]:SendMigrateApp ST:          Action: do-append-xml-element("search-attr","$current-node",before="*[1]",notrace="true").
+[11/01/21 15:52:14.986]:SendMigrateApp ST:          Action: do-set-xml-attr("attr-name","$current-node/search-attr","CN").
+[11/01/21 15:52:14.986]:SendMigrateApp ST:            arg-string("CN")
+[11/01/21 15:52:14.987]:SendMigrateApp ST:              token-text("CN")
+[11/01/21 15:52:14.987]:SendMigrateApp ST:              Arg Value: "CN".
+[11/01/21 15:52:14.987]:SendMigrateApp ST:          Action: do-append-xml-element("value","$current-node/search-attr[last()]",before="*[1]",notrace="true").
+[11/01/21 15:52:14.987]:SendMigrateApp ST:          Action: do-append-xml-text("$current-node/search-attr[last()]/value[last()]",token-src-name()).
+[11/01/21 15:52:14.988]:SendMigrateApp ST:            arg-string(token-src-name())
+[11/01/21 15:52:14.988]:SendMigrateApp ST:              token-src-name()
+[11/01/21 15:52:14.988]:SendMigrateApp ST:                Token Value: "employee1".
+[11/01/21 15:52:14.988]:SendMigrateApp ST:              Arg Value: "employee1".
+[11/01/21 15:52:14.988]:SendMigrateApp ST:          Action: do-set-local-variable("varQueryXDS-ns",scope="policy",arg-node-set(token-xml-parse(token-xml-serialize(token-xpath("$current-node",notrace="true"))))).
+[11/01/21 15:52:14.989]:SendMigrateApp ST:            arg-node-set(token-xml-parse(token-xml-serialize(token-xpath("$current-node",notrace="true"))))
+[11/01/21 15:52:14.989]:SendMigrateApp ST:              token-xml-parse(token-xml-serialize(token-xpath("$current-node",notrace="true")))
+[11/01/21 15:52:14.989]:SendMigrateApp ST:                token-xml-parse(token-xml-serialize(token-xpath("$current-node",notrace="true")))
+[11/01/21 15:52:14.990]:SendMigrateApp ST:                  token-xml-serialize(token-xpath("$current-node",notrace="true"))
+[11/01/21 15:52:14.990]:SendMigrateApp ST:                    token-xml-serialize(token-xpath("$current-node",notrace="true"))
+[11/01/21 15:52:14.990]:SendMigrateApp ST:                      token-xpath("$current-node",notrace="true")
+[11/01/21 15:52:14.990]:SendMigrateApp ST:                      Token Value: {<query> @cached-time = "20211101155214.898Z" @class-name = "User" @event-id = "migrateQuery:trigger" @scope = "entry" @timestamp = "1635781934#2"}.
+[11/01/21 15:52:15.016]:SendMigrateApp ST:                      Arg Value: {<query> @cached-time = "20211101155214.898Z" @class-name = "User" @event-id = "migrateQuery:trigger" @scope = "entry" @timestamp = "1635781934#2"}.
+[11/01/21 15:52:15.017]:SendMigrateApp ST:                    Token Value: "<query cached-time="20211101155214.898Z" class-name="User" event-id="migrateQuery:trigger" scope="entry" timestamp="1635781934#2">
+	<search-attr attr-name="CN">
+		<value>employee1</value>
+	</search-attr>
+</query>".
+[11/01/21 15:52:15.017]:SendMigrateApp ST:                  Arg Value: "<query cached-time="20211101155214.898Z" class-name="User" event-id="migrateQuery:trigger" scope="entry" timestamp="1635781934#2">
+	<search-attr attr-name="CN">
+		<value>employee1</value>
+	</search-attr>
+</query>".
+[11/01/21 15:52:15.018]:SendMigrateApp ST:              Token Value: {/}.
+[11/01/21 15:52:15.018]:SendMigrateApp ST:              Arg Value: {/}.
+[11/01/21 15:52:15.018]:SendMigrateApp ST:          Action: do-strip-xpath("$current-node").
+[11/01/21 15:52:15.018]:SendMigrateApp ST:      Action: do-trace-message(token-xml-serialize(token-local-variable("varQueryXDS-ns"))).
+[11/01/21 15:52:15.019]:SendMigrateApp ST:        arg-string(token-xml-serialize(token-local-variable("varQueryXDS-ns")))
+[11/01/21 15:52:15.019]:SendMigrateApp ST:          token-xml-serialize(token-local-variable("varQueryXDS-ns"))
+[11/01/21 15:52:15.019]:SendMigrateApp ST:            token-xml-serialize(token-local-variable("varQueryXDS-ns"))
+[11/01/21 15:52:15.019]:SendMigrateApp ST:              token-local-variable("varQueryXDS-ns")
+[11/01/21 15:52:15.020]:SendMigrateApp ST:              Token Value: {/}.
+[11/01/21 15:52:15.020]:SendMigrateApp ST:              Arg Value: {/}.
+[11/01/21 15:52:15.020]:SendMigrateApp ST:            Token Value: "<query cached-time="20211101155214.898Z" class-name="User" event-id="migrateQuery:trigger" scope="entry" timestamp="1635781934#2">
+	<search-attr attr-name="CN">
+		<value>employee1</value>
+	</search-attr>
+</query>".
+[11/01/21 15:52:15.020]:SendMigrateApp ST:          Arg Value: "<query cached-time="20211101155214.898Z" class-name="User" event-id="migrateQuery:trigger" scope="entry" timestamp="1635781934#2">
+	<search-attr attr-name="CN">
+		<value>employee1</value>
+	</search-attr>
+</query>".
+[11/01/21 15:52:15.021]:SendMigrateApp ST:<query cached-time="20211101155214.898Z" class-name="User" event-id="migrateQuery:trigger" scope="entry" timestamp="1635781934#2">
+	<search-attr attr-name="CN">
+		<value>employee1</value>
+	</search-attr>
+</query>
+[11/01/21 15:52:15.022]:SendMigrateApp ST:      Action: do-set-local-variable("DriverDN",scope="policy",token-parse-dn(dest-dn-format="slash",length="-2",src-dn-format="slash","\IDVP\system\driverset1\SendMigrateApp")+"\JDBC").
+[11/01/21 15:52:15.022]:SendMigrateApp ST:        arg-string(token-parse-dn(dest-dn-format="slash",length="-2",src-dn-format="slash","\IDVP\system\driverset1\SendMigrateApp")+"\JDBC")
+[11/01/21 15:52:15.022]:SendMigrateApp ST:          token-parse-dn(dest-dn-format="slash",length="-2",src-dn-format="slash","\IDVP\system\driverset1\SendMigrateApp")
+[11/01/21 15:52:15.023]:SendMigrateApp ST:            token-parse-dn(dest-dn-format="slash",length="-2",src-dn-format="slash","\IDVP\system\driverset1\SendMigrateApp")
+[11/01/21 15:52:15.023]:SendMigrateApp ST:              token-text("\IDVP\system\driverset1\SendMigrateApp")
+[11/01/21 15:52:15.023]:SendMigrateApp ST:              Arg Value: "\IDVP\system\driverset1\SendMigrateApp".
+[11/01/21 15:52:15.023]:SendMigrateApp ST:            Token Value: "\IDVP\system\driverset1".
+[11/01/21 15:52:15.023]:SendMigrateApp ST:          token-text("\JDBC")
+[11/01/21 15:52:15.024]:SendMigrateApp ST:          Arg Value: "\IDVP\system\driverset1\JDBC".
+[11/01/21 15:52:15.024]:SendMigrateApp ST:      Action: do-if().
+[11/01/21 15:52:15.024]:SendMigrateApp ST:        Evaluating conditions.
+[11/01/21 15:52:15.024]:SendMigrateApp ST:          (if-global-variable 'drv.action.queueEvent' equal "use-es") = FALSE.
+[11/01/21 15:52:15.024]:SendMigrateApp ST:      Action: do-if().
+[11/01/21 15:52:15.024]:SendMigrateApp ST:        Evaluating conditions.
+[11/01/21 15:52:15.025]:SendMigrateApp ST:          (if-global-variable 'drv.action.queueEvent' equal "use-jar") = TRUE.
+[11/01/21 15:52:15.030]:SendMigrateApp ST:        Performing if actions.
+[11/01/21 15:52:15.030]:SendMigrateApp ST:          Action: do-set-local-variable("XDS",scope="policy",arg-node-set(token-xml-parse("<nds><input>"+token-xml-serialize(token-local-variable("varQueryXDS-ns"))+"</input></nds>"))).
+[11/01/21 15:52:15.031]:SendMigrateApp ST:            arg-node-set(token-xml-parse("<nds><input>"+token-xml-serialize(token-local-variable("varQueryXDS-ns"))+"</input></nds>"))
+[11/01/21 15:52:15.031]:SendMigrateApp ST:              token-xml-parse("<nds><input>"+token-xml-serialize(token-local-variable("varQueryXDS-ns"))+"</input></nds>")
+[11/01/21 15:52:15.031]:SendMigrateApp ST:                token-xml-parse("<nds><input>"+token-xml-serialize(token-local-variable("varQueryXDS-ns"))+"</input></nds>")
+[11/01/21 15:52:15.032]:SendMigrateApp ST:                  token-text("<nds><input>")
+[11/01/21 15:52:15.032]:SendMigrateApp ST:                  token-xml-serialize(token-local-variable("varQueryXDS-ns"))
+[11/01/21 15:52:15.032]:SendMigrateApp ST:                    token-xml-serialize(token-local-variable("varQueryXDS-ns"))
+[11/01/21 15:52:15.033]:SendMigrateApp ST:                      token-local-variable("varQueryXDS-ns")
+[11/01/21 15:52:15.033]:SendMigrateApp ST:                      Token Value: {/}.
+[11/01/21 15:52:15.033]:SendMigrateApp ST:                      Arg Value: {/}.
+[11/01/21 15:52:15.033]:SendMigrateApp ST:                    Token Value: "<query cached-time="20211101155214.898Z" class-name="User" event-id="migrateQuery:trigger" scope="entry" timestamp="1635781934#2">
+	<search-attr attr-name="CN">
+		<value>employee1</value>
+	</search-attr>
+</query>".
+[11/01/21 15:52:15.034]:SendMigrateApp ST:                  token-text("</input></nds>")
+[11/01/21 15:52:15.034]:SendMigrateApp ST:                  Arg Value: "<nds><input><query cached-time="20211101155214.898Z" class-name="User" event-id="migrateQuery:trigger" scope="entry" timestamp="1635781934#2">
+	<search-attr attr-name="CN">
+		<value>employee1</value>
+	</search-attr>
+</query></input></nds>".
+[11/01/21 15:52:15.035]:SendMigrateApp ST:              Token Value: {/}.
+[11/01/21 15:52:15.036]:SendMigrateApp ST:              Arg Value: {/}.
+[11/01/21 15:52:15.036]:SendMigrateApp ST:          Action: do-set-local-variable("CmdResult",scope="policy",arg-node-set(token-xpath("dxqueue:sendMigrateApp($DriverDN, $XDS/nds)"))).
+[11/01/21 15:52:15.037]:SendMigrateApp ST:            arg-node-set(token-xpath("dxqueue:sendMigrateApp($DriverDN, $XDS/nds)"))
+[11/01/21 15:52:15.037]:SendMigrateApp ST:              token-xpath("dxqueue:sendMigrateApp($DriverDN, $XDS/nds)")
+[11/01/21 15:52:15.044]:SendMigrateApp ST:              Token Value: {<nds> @dtdversion = "4.0" @ndsversion = "8.x"}.
+[11/01/21 15:52:15.045]:SendMigrateApp ST:              Arg Value: {<nds> @dtdversion = "4.0" @ndsversion = "8.x"}.
+[11/01/21 15:52:15.045]:SendMigrateApp ST:      Action: do-trace-message(token-xml-serialize(token-xpath("$CmdResult//status"))).
+[11/01/21 15:52:15.045]:SendMigrateApp ST:        arg-string(token-xml-serialize(token-xpath("$CmdResult//status")))
+[11/01/21 15:52:15.046]:SendMigrateApp ST:          token-xml-serialize(token-xpath("$CmdResult//status"))
+[11/01/21 15:52:15.046]:SendMigrateApp ST:            token-xml-serialize(token-xpath("$CmdResult//status"))
+[11/01/21 15:52:15.046]:SendMigrateApp ST:              token-xpath("$CmdResult//status")
+[11/01/21 15:52:15.046]:SendMigrateApp ST:              Token Value: {<status> @level = "success"}.
+[11/01/21 15:52:15.047]:SendMigrateApp ST:              Arg Value: {<status> @level = "success"}.
+[11/01/21 15:52:15.047]:SendMigrateApp ST:            Token Value: "<status level="success">Submitted document to \IDVP\system\driverset1\JDBC</status>".
+[11/01/21 15:52:15.047]:SendMigrateApp ST:          Arg Value: "<status level="success">Submitted document to \IDVP\system\driverset1\JDBC</status>".
+[11/01/21 15:52:15.047]:SendMigrateApp ST:<status level="success">Submitted document to \IDVP\system\driverset1\JDBC</status>
+[11/01/21 15:52:15.048]:SendMigrateApp ST:Policy returned:
+[11/01/21 15:52:15.048]:SendMigrateApp ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <modify cached-time="20211101155214.898Z" class-name="User" event-id="b5fd30f29e6f#20211101155214#1#1:2857c6c4-2fd0-4212-8f5a-c4c65728d02f" qualified-src-dn="O=data\OU=users\CN=employee1" src-dn="\IDVP\data\users\employee1" src-entry-id="33767" timestamp="1635781934#2">
+      <modify-attr attr-name="Given Name">
+        <remove-value>
+          <value timestamp="1635781912#2" type="string">HR-JAR</value>
+        </remove-value>
+        <add-value>
+          <value timestamp="1635781934#2" type="string">HR-JAR2</value>
+        </add-value>
+      </modify-attr>
+    </modify>
+  </input>
+</nds>
+[11/01/21 15:52:15.051]:SendMigrateApp ST:Subscriber processing modify for \IDVP\data\users\employee1.
+[11/01/21 15:52:15.051]:SendMigrateApp ST:Converting <modify> to <add>
+[11/01/21 15:52:15.051]:SendMigrateApp ST:Reading relevant attributes from \IDVP\data\users\employee1.
+[11/01/21 15:52:15.052]:SendMigrateApp ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <query class-name="User" dest-dn="\IDVP\data\users\employee1" dest-entry-id="33767" scope="entry">
+      <read-attr attr-name="CN"/>
+      <read-attr attr-name="Given Name"/>
+      <read-attr attr-name="Surname"/>
+    </query>
+  </input>
+</nds>
+[11/01/21 15:52:15.053]:SendMigrateApp ST:Pumping XDS to eDirectory.
+[11/01/21 15:52:15.053]:SendMigrateApp ST:Performing operation query for \IDVP\data\users\employee1.
+[11/01/21 15:52:15.053]:SendMigrateApp ST:--JCLNT-- \IDVP\system\driverset1\SendMigrateApp : Duplicating : context = 195362983, tempContext = 195362979
+[11/01/21 15:52:15.054]:SendMigrateApp ST:--JCLNT-- \IDVP\system\driverset1\SendMigrateApp : Calling free on tempContext = 195362979
+[11/01/21 15:52:15.054]:SendMigrateApp ST:Read result:
+[11/01/21 15:52:15.055]:SendMigrateApp ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <output>
+    <instance class-name="User" qualified-src-dn="O=data\OU=users\CN=employee1" src-dn="\IDVP\data\users\employee1" src-entry-id="33767">
+      <attr attr-name="CN">
+        <value naming="true" timestamp="1634841185#23" type="string">employee1</value>
+      </attr>
+      <attr attr-name="Given Name">
+        <value timestamp="1635781934#2" type="string">HR-JAR2</value>
+      </attr>
+      <attr attr-name="Surname">
+        <value timestamp="1634841185#3" type="string">Employee</value>
+      </attr>
+    </instance>
+    <status level="success"></status>
+  </output>
+</nds>
+[11/01/21 15:52:15.075]:SendMigrateApp ST:Synthetic add:
+[11/01/21 15:52:15.075]:SendMigrateApp ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <add cached-time="20211101155214.898Z" class-name="User" event-id="b5fd30f29e6f#20211101155214#1#1:2857c6c4-2fd0-4212-8f5a-c4c65728d02f" qualified-src-dn="O=data\OU=users\CN=employee1" src-dn="\IDVP\data\users\employee1" src-entry-id="33767" timestamp="1635781934#2">
+      <add-attr attr-name="CN">
+        <value naming="true" timestamp="1634841185#23" type="string">employee1</value>
+      </add-attr>
+      <add-attr attr-name="Given Name">
+        <value timestamp="1635781934#2" type="string">HR-JAR2</value>
+      </add-attr>
+      <add-attr attr-name="Surname">
+        <value timestamp="1634841185#3" type="string">Employee</value>
+      </add-attr>
+    </add>
+  </input>
+</nds>
+[11/01/21 15:52:15.078]:SendMigrateApp ST:No object matching policies.
+[11/01/21 15:52:15.078]:SendMigrateApp ST:No object creation policies.
+[11/01/21 15:52:15.079]:SendMigrateApp ST:No object placement policies.
+[11/01/21 15:52:15.079]:SendMigrateApp ST:Submitting add to subscriber shim.
+[11/01/21 15:52:15.079]:SendMigrateApp ST:No command transformation policies.
+[11/01/21 15:52:15.079]:SendMigrateApp ST:Filtering out notification-only attributes.
+[11/01/21 15:52:15.080]:SendMigrateApp ST:Fixing up association references.
+[11/01/21 15:52:15.080]:SendMigrateApp ST:No schema mapping policies.
+[11/01/21 15:52:15.080]:SendMigrateApp ST:No output transformation policies.
+[11/01/21 15:52:15.081]:SendMigrateApp ST:Submitting document to subscriber shim:
+[11/01/21 15:52:15.081]:SendMigrateApp ST:
+<nds dtdversion="4.0" ndsversion="8.x">
+  <source>
+    <product edition="Advanced" version="4.8.4.0">DirXML</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <input>
+    <add cached-time="20211101155214.898Z" class-name="User" event-id="b5fd30f29e6f#20211101155214#1#1:2857c6c4-2fd0-4212-8f5a-c4c65728d02f" qualified-src-dn="O=data\OU=users\CN=employee1" src-dn="\IDVP\data\users\employee1" src-entry-id="33767" timestamp="1635781934#2">
+      <add-attr attr-name="CN">
+        <value naming="true" timestamp="1634841185#23" type="string">employee1</value>
+      </add-attr>
+      <add-attr attr-name="Given Name">
+        <value timestamp="1635781934#2" type="string">HR-JAR2</value>
+      </add-attr>
+      <add-attr attr-name="Surname">
+        <value timestamp="1634841185#3" type="string">Employee</value>
+      </add-attr>
+    </add>
+  </input>
+</nds>
+[11/01/21 15:52:15.082]:SendMigrateApp ST:SubscriptionShim.execute() returned:
+[11/01/21 15:52:15.083]:SendMigrateApp ST:
+<nds dtdversion="4.0">
+  <source>
+    <product build="20210726_032919" instance="SendMigrateApp" version="4.8.4.0">DirXML Null Driver</product>
+    <contact>NetIQ Corporation</contact>
+  </source>
+  <output>
+    <status event-id="b5fd30f29e6f#20211101155214#1#1:2857c6c4-2fd0-4212-8f5a-c4c65728d02f" level="success"/>
+  </output>
+</nds>
+[11/01/21 15:52:15.083]:SendMigrateApp ST:No input transformation policies.
+[11/01/21 15:52:15.083]:SendMigrateApp ST:No schema mapping policies.
+[11/01/21 15:52:15.084]:SendMigrateApp ST:Resolving association references.
+[11/01/21 15:52:15.084]:SendMigrateApp ST:Processing returned document.
+[11/01/21 15:52:15.084]:SendMigrateApp ST:Processing operation <status> for .
+[11/01/21 15:52:15.084]:SendMigrateApp ST:
+DirXML Log Event -------------------
+     Driver:   \IDVP\system\driverset1\SendMigrateApp
+     Channel:  Subscriber
+     Object:   \IDVP\data\users\employee1
+     Status:   Success
+[11/01/21 15:52:15.084]:SendMigrateApp ST:End transaction.

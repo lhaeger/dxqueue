@@ -66,7 +66,7 @@
 			<attributes/>
 			<children>
 				<rule name="Send Migrate App">
-					<policy>
+					<policy xmlns:dxqueue="http://www.novell.com/nxsl/java/dxqueue.send">
 						<rule>
 							<description>Query Event</description>
 							<comment xml:space="preserve">This policy will trigger on an incoming event, and generate a XDS Message to put onto the other driver.  In this scenario, it does the following: 
@@ -175,14 +175,20 @@ There are a few tricks:
 										</and>
 									</arg-conditions>
 									<arg-actions>
-										<do-trace-message>
-											<arg-string>
-												<token-text xml:space="preserve">Not yet supported, use ECMAScript version instead</token-text>
-											</arg-string>
-										</do-trace-message>
-										<do-set-local-variable disabled="true" name="CmdResult" scope="policy">
+										<do-set-local-variable name="XDS" scope="policy">
 											<arg-node-set>
-												<token-xpath expression="dxmigrate:sendMigrateApp($DriverDN, $varQueryXDS-ns)"/>
+												<token-xml-parse>
+													<token-text xml:space="preserve">&lt;nds>&lt;input></token-text>
+													<token-xml-serialize>
+														<token-local-variable name="varQueryXDS-ns"/>
+													</token-xml-serialize>
+													<token-text xml:space="preserve">&lt;/input>&lt;/nds></token-text>
+												</token-xml-parse>
+											</arg-node-set>
+										</do-set-local-variable>
+										<do-set-local-variable name="CmdResult" scope="policy">
+											<arg-node-set>
+												<token-xpath expression="dxqueue:sendMigrateApp($DriverDN, $XDS/nds)"/>
 											</arg-node-set>
 										</do-set-local-variable>
 									</arg-actions>
