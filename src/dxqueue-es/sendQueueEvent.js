@@ -22,7 +22,7 @@ function serializeEx(doc, indent) {
     //requires: java.io.StringWriter
     //requires: com.novell.xml.dom.DOMWriter
     indent = "undefined" !== typeof indent ? !!indent : !0;
-    var sw = new StringWriter;
+    var sw = new StringWriter();
     dw = new DOMWriter(doc, sw);
     dw.setIndent(!!indent);
     dw.write();
@@ -89,6 +89,7 @@ function properXDS(doc) {
             debugMessage('Returning supplied XDS unchanged, already proper XDS', debugDefault + 1)
             return doc;
         }
+        // known valid commands from XDS DTD
         if (null != rootDocNode && rootNodeName.matches('add|modify|modify-password|query|query-ex|rename|move|delete|trigger|sync')) {
             // Merging supplied XDS with wrapper
             debugMessage('Merging supplied XDS with wrapper: ' + rootNodeName, debugDefault + 1)
@@ -122,38 +123,42 @@ function sendQueueEvent(driverDN, myElement) {
     // function debugMessage
     // function properXDS
     // skeletonXDS
+
+    var supportedOps = 'add|modify|modify-password|rename|move|delete|trigger|sync|statement';
+    // relaxed processing: unsupported commands normally are ignored, but may mean something to specififc shims.
+    // as long as the doc is otherwise well formed, it should not crash the engine.
+    var processUnsupportedOps = true
+    var myEncoding = java.nio.charset.StandardCharsets.UTF_8;
+
     if (!(Packages.com.novell.nds.dirxml.engine.DirXML.isExternal())) {
-        try {
+        try {           
             debugMessage('Cleaning up supplied XDS');
             var theElement = properXDS(myElement);
             (theElement === myElement) ? debugMessage('Passthru XDS as-is') : debugMessage('Cleaned up XDS')
             //debugMessage('Detected theElement: ' + theElement, debugDefault + 1)
-            var myEncoding = java.nio.charset.StandardCharsets.UTF_8;
             debugMessage('Validating document')
 
             try {
                 if (null == rootDoc) {
                     var rootDoc = theElement.first().getFirstChild().getOwnerDocument()
                 }
-            } catch (e) { debugMessage('First node not found, falling back to first alternate mechanism') }
+            } catch (e) { debugMessage('First node not found, falling back to first alternate mechanism', debugDefault + 1) }
             try {
                 if (null == rootDoc) {
                     var rootDoc = theElement.getFirstChild().getOwnerDocument()
                 }
-            } catch (e) { debugMessage('First node not found, falling back to second alternate mechanism' + e) }
+            } catch (e) { debugMessage('First node not found, falling back to second alternate mechanism' + e, debugDefault + 1) }
             try {
                 if (null == rootDoc) {
                     var rootDoc = theElement.first().getOwnerDocument()
                 }
             } catch (e) { debugMessage('error' + e) }
             if (null == rootDoc) {
-                debugMessage('Trying built-in getOwnerDocument() method as last resort');
+                debugMessage('Trying built-in getOwnerDocument() method as last resort', debugDefault + 1);
                 var rootDoc = theElement.getOwnerDocument()
             }
 
 
- /* does not work for me, always getting "Nothing to submit!"
- 
             try {
                 if (null == myOps) {
                     var myOps = Packages.com.novell.xml.dom.DOMQuery.query(rootDoc, "//input/*");
@@ -163,19 +168,22 @@ function sendQueueEvent(driverDN, myElement) {
             }
 
              if (null == myOps.first()) {
-                return NdsDtd.createStatusDocument((new java.lang.Integer(2)), null, 'Nothing to submit!')
+                return NdsDtd.createStatusDocument(NdsDtd.SL_WARNING, null, 'Nothing to submit!')
                     .getDocumentElement()
             }
 
-            if (myOps.first().getLocalName().matches('add|modify|modify-password|rename|move|delete|trigger|sync')) {
-                debugMessage('Detected command: ' + myOps.first().getLocalName())
+            if (myOps.first().getLocalName().matches(supportedOps)) {
+                debugMessage('Detected known command: ' + myOps.first().getLocalName())
             }
 
-            else {
-                return NdsDtd.createStatusDocument(NdsDtd.SL_ERROR, null, 'command:' + myOps.first().getLocalName() + ' is not valid for this function')
-                    .getDocumentElement()
+            else if (processUnsupportedOps) {
+                debugMessage('Detected unknown command: ' + myOps.first().getLocalName() + '. Submitting anyway, it may be ignored by the shim ')
             }
- */
+
+            else { 
+            return NdsDtd.createStatusDocument(NdsDtd.SL_ERROR, null, ('command: ' + myOps.first().getLocalName() + 'Not valid for this function'))
+                .getDocumentElement()
+            }
 
             debugMessage('Serializing document to ByteArray with encoding: ' + myEncoding)
             var serializedDoc = serializeEx(rootDoc, false)
@@ -193,7 +201,7 @@ function sendQueueEvent(driverDN, myElement) {
                 debugMessage('Attempting to authenticate to tree');
                 context.authenticate();
                 var currentDriverDN = ThreadGroupVars.get("vrDriverDN");
-                debugMessage('Verifying access to: ' + currentDriverDN);
+                debugMessage('Resolving source driver:' + currentDriverDN);
                 if (null == currentDriverDN) {
                     throw new JCException("getEffectivePriviledges()", -672);
                 }
@@ -202,8 +210,9 @@ function sendQueueEvent(driverDN, myElement) {
                     driverDN = '\\' + treeName + '\\' + driverDN;
                 }
 
-                debugMessage('Verifying access to: ' + driverDN);
+                debugMessage('Verifying target driver exists: ' + driverDN);
                 context.nameToID(1, driverDN);
+                debugMessage('Verifying rights to source driver: ' + currentDriverDN);
                 if ((context.getEffectivePrivileges(currentDriverDN, "[Entry Rights]") & 0x10) == (new java.lang.Long(0))) {
                     throw new JCException("getEffectivePriviledges()", -672);
                 }
@@ -212,7 +221,7 @@ function sendQueueEvent(driverDN, myElement) {
                 var wireCtor = new DxWire();
                 wireCtor.setDnFormat(0);
                 result = sendWireRequest(context, wireCtor.constructQueueEvent(driverDN, bytes));
-                output = NdsDtd.createStatusDocument(NdsDtd.SL_SUCCESS, null, 'Submitted document for execution on subscriber channel on driver: ' + currentDriverDN)
+                output = NdsDtd.createStatusDocument(NdsDtd.SL_SUCCESS, null, 'Submitted document for execution on subscriber channel on driver: ' + driverDN)
                     .getDocumentElement()
             }
 
