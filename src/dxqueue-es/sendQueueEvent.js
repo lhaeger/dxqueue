@@ -14,6 +14,8 @@ importClass(Packages.novell.jclient.JCException);
 importClass(Packages.novell.jclient.JClient);
 importClass(java.io.StringWriter);
 
+var VERSION = "1.2.0";
+
 var debugPrefix = 'sendQueueEvent';
 var debugDefault = 3;
 

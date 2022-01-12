@@ -19,7 +19,7 @@ public abstract class send {
 	
 	// An updated version of https://community.microfocus.com/t5/Identity-Manager-Tips/Sending-a-XDS-Message-from-one-driver-to-another/ta-p/1777175
 
-	public static final String VERSION = "1.1.1";
+	public static final String VERSION = "1.2.0";
 
 	public static Element sendQueueEvent(String driverDN, Element element) {
 
