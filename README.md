@@ -39,3 +39,7 @@ The ECMAScript version is a drop-in replacement for the Java helper class, with 
 Only query or query-ex operations can be queued.
 
     es:sendMigrateApp(java.lang.String driverDN, org.w3c.dom.Element element) 
+
+
+
+If you want to suppport this project [buy me a coffee](https://www.buymeacoffee.com/lhaeger)!
